@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products | Etch by OMIMI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: { extend: { colors: { ink: "#1A1A1A", mist: "#F9F9F7", gold: "#99A96A", ember: "#6F7D49", pine: "#4A5433", slate: "#5F654D", cloud: "#D4DBC2" }, fontFamily: { display: ['"Outfit"', "Avenir Next", "Century Gothic", "Arial", "sans-serif"], body: ['"Outfit"', "Avenir Next", "Century Gothic", "Arial", "sans-serif"] } } } };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="bg-mist text-ink font-body">
+    <header class="site-header">
+      <nav class="nav-shell mx-auto max-w-[1600px] px-4 py-5 sm:px-5 lg:px-6">
+        <a href="index.html" class="brand-mark"><img class="brand-mark__logo" src="img/logo/logo.png" alt="Etch by OMIMI logo" /><span><strong>Etch</strong><small>by OMIMI</small></span></a>
+        <button class="mobile-toggle lg:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" data-mobile-toggle><span></span><span></span></button>
+        <div class="nav-center hidden lg:flex">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="explore.html">Explore</a>
+          <a class="nav-link nav-link--active" href="products.html">Products</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link" href="contact.html">Contact</a>
+        </div>
+        <div class="nav-actions hidden lg:flex">
+          <form class="nav-search" role="search" action="search.html" method="get"><input type="search" name="q" placeholder="Search scripts, songs, storyboards" aria-label="Search" /></form>
+          <a class="button button--primary" href="signin.html">Log in</a>
+          <a class="nav-avatar" href="user-dashboard.html" aria-label="Open account"><span class="nav-avatar__badge">OA</span><span class="nav-avatar__meta"><strong>Oma A.</strong><small>Collector</small></span></a>
+        </div>
+      </nav>
+      <div id="mobile-menu" class="mobile-menu lg:hidden" hidden><div class="mobile-menu__top"><span class="mobile-menu__title">Menu</span><button class="mobile-menu__close" type="button" data-mobile-close aria-label="Close menu">×</button></div>
+        <div class="mobile-menu__account"><a class="nav-avatar" href="user-dashboard.html" aria-label="Open account"><span class="nav-avatar__badge">OA</span><span class="nav-avatar__meta"><strong>Oma A.</strong><small>Collector</small></span></a></div>
+        <a href="index.html">Home</a><a href="search.html">Search</a><a href="explore.html">Explore</a><a href="products.html">Products</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="signup.html">Sign up</a><div class="mobile-menu__actions"><a class="button button--primary" href="signin.html">Log in</a></div>
+      </div>
+    </header>
+    <main>
+      <section class="page-intro">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="page-intro__grid">
+            <div>
+              <span class="eyebrow">Marketplace</span>
+              <h1 class="section-title">Browse premium listings.</h1>
+              <p class="mt-5 max-w-2xl text-lg leading-8 text-slate">Discover vetted scripts, visuals, audio, and custom brief opportunities through a cleaner, more premium marketplace view.</p>
+            </div>
+            <figure class="section-banner"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="Product strategy and creative operations desk" loading="lazy" /></figure>
+          </div>
+        </div>
+      </section>
+      <section class="mx-auto max-w-7xl px-6 pb-20 lg:px-8">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Marketplace feed</span>
+            <h2 class="section-title">Curated by category.</h2>
+          </div>
+          <div class="market-tabs" data-market-tabs>
+            <button class="tab-button is-active" type="button" data-market-filter="all">All</button>
+            <button class="tab-button" type="button" data-market-filter="Scripts">Scripts</button>
+            <button class="tab-button" type="button" data-market-filter="Visuals">Visuals</button>
+            <button class="tab-button" type="button" data-market-filter="Audio">Audio</button>
+            <button class="tab-button" type="button" data-market-filter="Art">Art</button>
+            <button class="tab-button" type="button" data-market-filter="Copy">Copy</button>
+            <button class="tab-button" type="button" data-market-filter="Motion">Motion</button>
+            <button class="tab-button" type="button" data-market-filter="Briefs">Briefs</button>
+          </div>
+        </div>
+        <div class="market-grid market-grid--dense">
+          <article class="market-card market-card--featured" data-market-card data-category="Scripts"><img class="market-card__image" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=80" alt="Screenplay development workspace" loading="lazy" /><div class="market-card__body"><div class="market-card__meta-row"><span class="market-card__label">Featured script</span><span class="market-card__price">$3,200</span></div><h3>Midnight Sun Pilot</h3><p>Drama pilot package with pitch deck, synopsis, and clean option terms.</p><div class="market-card__chips"><span class="meta-pill">Script</span><span class="meta-pill">Series-ready</span><span class="meta-pill">Deck included</span></div></div><div class="market-card__footer"><div class="market-card__seller"><strong>Daniel K.</strong><small>Screenwriter</small></div><a class="market-card__cta" href="product-detail.html">View</a></div></article>
+          <article class="market-card" data-market-card data-category="Visuals"><img class="market-card__image" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=80" alt="Storyboard and visual planning session" loading="lazy" /><div class="market-card__body"><div class="market-card__meta-row"><span class="market-card__label">Visual package</span><span class="market-card__price">$2,400</span></div><h3>Frames of Lagos</h3><p>Storyboard-led concept suite for film campaigns and branded content.</p><div class="market-card__chips"><span class="meta-pill">Visuals</span><span class="meta-pill">Storyboard</span><span class="meta-pill">Campaign-ready</span></div></div><div class="market-card__footer"><div class="market-card__seller"><strong>Amara O.</strong><small>Art director</small></div><a class="market-card__cta" href="product-detail.html">View</a></div></article>
+          <article class="market-card" data-market-card data-category="Audio"><img class="market-card__image" src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=900&q=80" alt="Audio production workspace" loading="lazy" /><div class="market-card__body"><div class="market-card__meta-row"><span class="market-card__label">Audio release</span><span class="market-card__price">$1,850</span></div><h3>Fireline Anthem</h3><p>Sync-ready vocal with cleared rights notes and commercial cutdowns.</p><div class="market-card__chips"><span class="meta-pill">Audio</span><span class="meta-pill">Sync-ready</span><span class="meta-pill">Alt mix</span></div></div><div class="market-card__footer"><div class="market-card__seller"><strong>Kehinde A.</strong><small>Music producer</small></div><a class="market-card__cta" href="product-detail.html">View</a></div></article>
+          <article class="market-card" data-market-card data-category="Scripts"><img class="market-card__image" src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=900&q=80" alt="Writing and content strategy desk" loading="lazy" /><div class="market-card__body"><div class="market-card__meta-row"><span class="market-card__label">Shortlist pick</span><span class="market-card__price">$1,400</span></div><h3>The Last Draft</h3><p>Screenplay package built for faster executive review and adaptation talks.</p><div class="market-card__chips"><span class="meta-pill">Script</span><span class="meta-pill">Pitch-ready</span><span class="meta-pill">Rights notes</span></div></div><div class="market-card__footer"><div class="market-card__seller"><strong>Tosin E.</strong><small>Writer</small></div><a class="market-card__cta" href="product-detail.html">View</a></div></article>
+          <article class="market-card" data-market-card data-category="Visuals"><img class="market-card__image" src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=900&q=80" alt="Illustration and digital art setup" loading="lazy" /><div class="market-card__body"><div class="market-card__meta-row"><span class="market-card__label">Art direction</span><span class="market-card__price">$2,050</span></div><h3>Neon Atlas Kit</h3><p>Illustration and concept art pack for title sequences and key visuals.</p><div class="market-card__chips"><span class="meta-pill">Art</span><span class="meta-pill">Concept pack</span><span class="meta-pill">Key art</span></div></div><div class="market-card__footer"><div class="market-card__seller"><strong>Ife B.</strong><small>Illustrator</small></div><a class="market-card__cta" href="product-detail.html">View</a></div></article>
+          <article class="market-card" data-market-card data-category="Copy"><img class="market-card__image" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80" alt="Copywriting and campaign strategy desk" loading="lazy" /><div class="market-card__body"><div class="market-card__meta-row"><span class="market-card__label">Brand copy</span><span class="market-card__price">$980</span></div><h3>Campaign Voice Pack</h3><p>Messaging suite for premium brands, launches, and entertainment campaigns.</p><div class="market-card__chips"><span class="meta-pill">Copy</span><span class="meta-pill">Campaign</span><span class="meta-pill">Launch-ready</span></div></div><div class="market-card__footer"><div class="market-card__seller"><strong>Tade L.</strong><small>Copy strategist</small></div><a class="market-card__cta" href="product-detail.html">View</a></div></article>
+          <article class="market-card" data-market-card data-category="Motion"><img class="market-card__image" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=900&q=80" alt="Motion graphics and audio visual workspace" loading="lazy" /><div class="market-card__body"><div class="market-card__meta-row"><span class="market-card__label">Motion reel</span><span class="market-card__price">$1,650</span></div><h3>Pulse Motion Pack</h3><p>Motion assets built for digital campaigns, stage screens, and branded films.</p><div class="market-card__chips"><span class="meta-pill">Motion</span><span class="meta-pill">Visual loops</span><span class="meta-pill">Ad-ready</span></div></div><div class="market-card__footer"><div class="market-card__seller"><strong>Mira S.</strong><small>Motion designer</small></div><a class="market-card__cta" href="product-detail.html">View</a></div></article>
+          <article class="market-card market-card--accent" data-market-card data-category="Briefs"><img class="market-card__image" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Creative team discussing project brief" loading="lazy" /><div class="market-card__body"><div class="market-card__meta-row"><span class="market-card__label">Open brief</span><span class="market-card__price">Apply</span></div><h3>Luxury brand sound brief</h3><p>Seeking a sync-ready sonic identity for a premium campaign rollout.</p><div class="market-card__chips"><span class="meta-pill">Briefs</span><span class="meta-pill">Brand</span><span class="meta-pill">Fast review</span></div></div><div class="market-card__footer"><div class="market-card__seller"><strong>Buyer concierge</strong><small>Campaign team</small></div><a class="market-card__cta" href="contact.html">Apply</a></div></article>
+        </div>
+        <div class="market-empty" data-market-empty hidden><strong>No listings yet</strong><p>No marketplace cards match this category right now. Try another service tab or switch back to all listings.</p></div>
+      </section>
+    </main>
+    <footer class="site-footer site-footer--rich"><div class="mx-auto max-w-7xl px-6 lg:px-8"><div class="footer-panel"><div class="footer-grid"><div><a href="index.html" class="brand-mark brand-mark--footer"><img class="brand-mark__logo" src="img/logo/logo.png" alt="Etch by OMIMI logo" /><span><strong>Etch</strong><small>by OMIMI</small></span></a><p class="footer-copy mt-4">Product layers that make creative commerce feel cleaner, safer, and more premium.</p></div><div><h3 class="footer-title">Platform</h3><div class="footer-stack"><a href="explore.html">Explore</a><a href="search.html">Search</a><a href="signup.html">Create account</a></div></div><div><h3 class="footer-title">Company</h3><div class="footer-stack"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="signin.html">Sign in</a></div></div><div><h3 class="footer-title">Community</h3><div class="footer-stack"><span>Instagram: @etch_by_omimi</span><span>TikTok: @etchbyomimi</span><span>Email: etchbyomimi@gmail.com</span></div></div></div><div class="footer-bottom"><span>Product-led creative commerce.</span><span>Etch by OMIMI</span></div></div></div></footer>
+    <script src="app.js"></script>
+  </body>
+</html>
