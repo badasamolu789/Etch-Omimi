@@ -101,6 +101,52 @@
       </div>`;
   }
 
+  async function initListingCreateForm() {
+    const form = document.querySelector("[data-listing-create-form]");
+    if (!form || !window.EtchApi || !window.EtchSupabase || !window.EtchUI) return;
+    const status = form.querySelector("[data-form-status]");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const button = form.querySelector("button[type='submit']");
+      const formData = new FormData(form);
+      if (status) status.textContent = "";
+      window.EtchUI.setButtonLoading(button, true, "Publishing...");
+
+      try {
+        const session = await window.EtchSupabase.requireSession(["creator", "admin"]);
+        if (!session) return;
+
+        const payload = {
+          owner_id: session.user.id,
+          title: String(formData.get("title") || "").trim(),
+          category: String(formData.get("category") || "").trim(),
+          description: String(formData.get("description") || "").trim(),
+          price: Number(formData.get("price") || 0),
+          currency: "USD",
+          status: String(formData.get("status") || "draft"),
+          cover_url: String(formData.get("cover_url") || "").trim() || null,
+          preview_url: String(formData.get("preview_url") || "").trim() || null,
+          rights_summary: String(formData.get("rights_summary") || "").trim(),
+        };
+
+        if (!payload.title || !payload.category) {
+          throw new Error("Add a title and category before saving the listing.");
+        }
+
+        const { error } = await window.EtchApi.createListing(payload);
+        if (error) throw error;
+        form.reset();
+        if (status) status.textContent = "Listing saved. You can review it from your Listings page.";
+      } catch (error) {
+        if (status) status.textContent = "";
+        window.EtchUI.toast(error.message || "Unable to save listing.", "error");
+      } finally {
+        window.EtchUI.setButtonLoading(button, false);
+      }
+    });
+  }
+
   async function hydrateDashboard() {
     if (!window.EtchApi || !window.EtchSupabase || !window.EtchUI) return;
     const path = window.location.pathname;
@@ -216,7 +262,7 @@
     if (listingsTable) listingsTable.innerHTML = window.EtchUI.skeletonList(4);
 
     try {
-      const session = await window.EtchSupabase.requireSession(isAdminDashboard ? ["admin"] : ["buyer", "creator", "admin"]);
+      const session = await window.EtchSupabase.requireSession(isAdminDashboard || adminQueue ? ["admin"] : ["creator", "admin"]);
       if (!session) return;
 
       if (isAdminDashboard) {
@@ -285,6 +331,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     highlightNav();
     hydrateDashboard();
+    initListingCreateForm();
   });
   window.EtchDashboard = { highlightNav, hydrateDashboard };
 })();

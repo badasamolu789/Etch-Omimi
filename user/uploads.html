@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Listing | Etch Creator Dashboard</title>
+  <meta name="description" content="Create a new Etch marketplace listing for review or draft publishing." />
+  <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <div data-component="include" data-src="../components/user-sidebar.html"></div>
+    <main class="dashboard-main">
+      <div data-component="include" data-src="../components/user-topbar.html"></div>
+
+      <section class="dashboard-grid">
+        <article class="dashboard-card dashboard-card--feature">
+          <p class="dashboard-label">Upload listing</p>
+          <h2>Package creative IP with enough context for a buyer to trust it.</h2>
+          <p>Create the core marketplace record first. Media files can be connected through storage once your Supabase buckets are active.</p>
+        </article>
+        <article class="dashboard-card dashboard-card--metric">
+          <p class="dashboard-label">Request type</p>
+          <strong>.insert()</strong>
+          <span>Creates one row in the listings table.</span>
+        </article>
+        <article class="dashboard-card dashboard-card--metric">
+          <p class="dashboard-label">Default path</p>
+          <strong>Draft</strong>
+          <span>Use review status when the listing is ready for moderation.</span>
+        </article>
+      </section>
+
+      <section class="dashboard-card">
+        <div class="section-header">
+          <h2>Listing information</h2>
+        </div>
+        <form class="dashboard-form" data-listing-create-form>
+          <div class="form-grid form-grid--two">
+            <label>
+              <span>Title</span>
+              <input type="text" name="title" placeholder="Short commercial title" required />
+            </label>
+            <label>
+              <span>Category</span>
+              <select name="category" required>
+                <option value="">Choose category</option>
+                <option value="script">Script</option>
+                <option value="storyboard">Storyboard</option>
+                <option value="music">Music</option>
+                <option value="concept-art">Concept art</option>
+                <option value="motion">Motion</option>
+                <option value="copy">Copy</option>
+              </select>
+            </label>
+            <label>
+              <span>Price</span>
+              <input type="number" name="price" min="0" step="50" placeholder="2500" />
+            </label>
+            <label>
+              <span>Status</span>
+              <select name="status">
+                <option value="draft">Draft</option>
+                <option value="review">Send to review</option>
+              </select>
+            </label>
+            <label>
+              <span>Cover image URL</span>
+              <input type="url" name="cover_url" placeholder="https://..." />
+            </label>
+            <label>
+              <span>Preview URL</span>
+              <input type="url" name="preview_url" placeholder="https://..." />
+            </label>
+          </div>
+          <label>
+            <span>Description</span>
+            <textarea name="description" rows="5" placeholder="Explain the creative asset, commercial fit, audience, and usage context."></textarea>
+          </label>
+          <label>
+            <span>Rights summary</span>
+            <textarea name="rights_summary" rows="4" placeholder="Describe commercial rights, exclusivity, restrictions, and custom deal options."></textarea>
+          </label>
+          <div class="form-actions">
+            <span class="form-status" data-form-status aria-live="polite"></span>
+            <button class="button button--primary" type="submit">Save listing</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+  <script src="../scripts/components.js"></script>
+  <script src="../scripts/ui.js"></script>
+  <script src="../scripts/api.js"></script>
+  <script src="../scripts/dashboard.js"></script>
+  <script src="../scripts/main.js"></script>
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/supabase.js"></script>
+  <script src="../scripts/auth.js"></script>
+</body>
+</html>

@@ -2327,6 +2327,57 @@ a {
   line-height: 1.7;
 }
 
+.dashboard-form {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.dashboard-form label {
+  display: grid;
+  gap: 0.55rem;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.dashboard-form input,
+.dashboard-form select,
+.dashboard-form textarea {
+  width: 100%;
+  border: 1px solid rgba(74, 84, 51, 0.16);
+  border-radius: 14px;
+  background: rgba(249, 249, 247, 0.96);
+  color: var(--ink);
+  font: inherit;
+  padding: 0.95rem 1rem;
+}
+
+.dashboard-form textarea {
+  resize: vertical;
+}
+
+.dashboard-form input::placeholder,
+.dashboard-form textarea::placeholder {
+  color: rgba(95, 101, 77, 0.58);
+}
+
+.form-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-status {
+  min-height: 1.4rem;
+  color: var(--pine);
+  font-weight: 800;
+}
+
 .dashboard-card--metric strong {
   font-size: clamp(2rem, 3vw, 3.4rem);
   line-height: 1;

@@ -432,11 +432,12 @@ Profile content should include:
 
 Dashboard pages use a different visual style. They should still feel premium but more operational.
 
-Recommended structure:
+Implemented structure:
 
 ```text
 Overview
 Listings
+Upload
 Analytics
 Messages
 Licensing Requests
@@ -445,6 +446,18 @@ Settings
 ```
 
 Dashboard cards stay flat. Only action buttons receive shadows.
+
+Current files:
+
+- `user/dashboard.html`
+- `user/storefront.html`
+- `user/listings.html`
+- `user/uploads.html`
+- `user/licensing.html`
+- `user/messages.html`
+- `user/sales-earnings.html`
+
+These pages use `scripts/dashboard.js` and `scripts/api.js` for live Supabase reads, skeleton states, empty states, and listing creation.
 
 ## Buyer Dashboard
 
@@ -463,7 +476,9 @@ Invoices
 
 Upload is a critical creator flow.
 
-Recommended flow:
+Implemented file: `user/uploads.html`
+
+Recommended product flow:
 
 ```text
 Step 1: Basic Information
@@ -506,6 +521,19 @@ Good groups:
 - Payments
 - Reviews
 - Account
+
+## Admin Dashboard
+
+Implemented files:
+
+- `admin/dashboard.html`
+- `admin/content-review.html`
+- `admin/licensing-queue.html`
+- `admin/escrow-payouts.html`
+- `admin/support-inbox.html`
+- `admin/users.html`
+
+Admin pages use Supabase `.select()` work queues through `EtchApi.getAdminDashboard()` and `EtchApi.getAdminWorkQueue()`. They do not use hardcoded operational totals.
 
 ## API Expectations
 
