@@ -13,34 +13,13 @@
     <div data-component="include" data-src="../components/admin-sidebar.html"></div>
 <main class="dashboard-main">
       <div data-component="include" data-src="../components/admin-topbar.html"></div>
-<section class="dashboard-grid">
-        <article class="dashboard-card dashboard-card--feature dashboard-card--admin">
-          <p class="dashboard-label">Queue overview</p>
-          <h2>Monitor licensing demand, approvals, and request age.</h2>
-          <p>Sort requests by status and assign tickets to compliance or fulfillment teams.</p>
-        </article>
-        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
-          <p class="dashboard-label">Open requests</p>
-          <h3>18</h3>
-          <span>Licensing tasks waiting for action.</span>
-        </article>
-        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
-          <p class="dashboard-label">Escalated</p>
-          <h3>5</h3>
-          <span>Priority requests requiring fast turnaround.</span>
-        </article>
-      </section>
-      <section class="dashboard-card">
-        <div class="section-header"><h2>Active licensing requests</h2></div>
-        <div class="dashboard-list">
-          <div><strong>City of Echoes</strong><span>Awaiting approval • requester: MediaCo</span></div>
-          <div><strong>Sync Beat Package</strong><span>In negotiation • commercial use</span></div>
-          <div><strong>Storyboard package</strong><span>Ready for review • production queue</span></div>
-        </div>
-      </section>
+<section class="dashboard-grid" data-dashboard-stats></section>
+      <section class="dashboard-card" data-dashboard-primary-list></section>
     </main>
   </div>
   <script src="../scripts/components.js"></script>
+  <script src="../scripts/ui.js"></script>
+  <script src="../scripts/api.js"></script>
   <script src="../scripts/dashboard.js"></script>
   <script src="../scripts/main.js"></script>
   <script src="../scripts/config.js"></script>

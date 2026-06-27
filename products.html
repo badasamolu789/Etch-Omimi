@@ -113,6 +113,25 @@
       </div>
     </section>
 
+    <section class="editorial-section">
+      <div class="editorial-section__inner split-section">
+        <div>
+          <span class="eyebrow">Decision support</span>
+          <h2 class="section-title">Every listing should answer the first buyer questions.</h2>
+          <p class="mt-5 text-slate leading-8">
+            Products are structured around practical buying signals: category, creator context, price, rights summary,
+            and enough visual information to decide whether to open a conversation.
+          </p>
+        </div>
+        <div class="plain-list">
+          <div><strong>Commercial fit</strong><span>Understand where the work belongs before requesting access.</span></div>
+          <div><strong>Rights posture</strong><span>See the licensing direction and ownership notes early.</span></div>
+          <div><strong>Creator context</strong><span>Review who made the work and what they specialize in.</span></div>
+          <div><strong>Project velocity</strong><span>Move promising work into conversations without rebuilding context.</span></div>
+        </div>
+      </div>
+    </section>
+
     <section class="mx-auto max-w-7xl px-6 pb-20 lg:px-8">
       <div class="section-heading">
         <div>
@@ -120,8 +139,94 @@
           <h2 class="section-title">Curated listings.</h2>
         </div>
       </div>
+      <div class="marketplace-toolbar" data-marketplace-toolbar>
+        <form class="marketplace-search" data-marketplace-search>
+          <input type="search" name="q" placeholder="Search scripts, music, concepts, storyboards..." />
+          <button class="button button--primary" type="submit">Search</button>
+        </form>
+        <div class="marketplace-filter-row" aria-label="Marketplace filters">
+          <label>
+            Category
+            <select name="category" data-marketplace-category>
+              <option value="">All categories</option>
+              <option value="Scripts">Scripts</option>
+              <option value="Music">Music</option>
+              <option value="Audio">Audio</option>
+              <option value="Storyboards">Storyboards</option>
+              <option value="Visuals">Visuals</option>
+              <option value="Art">Art</option>
+              <option value="Copy">Copy</option>
+              <option value="Motion">Motion</option>
+            </select>
+          </label>
+          <label>
+            License
+            <select name="license" data-marketplace-license>
+              <option value="">Any license</option>
+              <option value="review">Review access</option>
+              <option value="sync">Sync-ready</option>
+              <option value="exclusive">Exclusive option</option>
+              <option value="custom">Custom deal</option>
+            </select>
+          </label>
+          <label>
+            Industry
+            <select name="industry" data-marketplace-industry>
+              <option value="">Any industry</option>
+              <option value="film">Film</option>
+              <option value="brand">Brand</option>
+              <option value="music">Music</option>
+              <option value="advertising">Advertising</option>
+            </select>
+          </label>
+          <label>
+            Price
+            <select name="price" data-marketplace-price>
+              <option value="">Any price</option>
+              <option value="0-1000">Under $1k</option>
+              <option value="1000-5000">$1k - $5k</option>
+              <option value="5000+">$5k+</option>
+            </select>
+          </label>
+          <label>
+            Sort
+            <select name="sort" data-marketplace-sort>
+              <option value="newest">Newest</option>
+              <option value="price_asc">Price low to high</option>
+              <option value="price_desc">Price high to low</option>
+              <option value="popular">Most viewed</option>
+            </select>
+          </label>
+        </div>
+        <div class="marketplace-results-meta">
+          <span data-marketplace-count>Loading listings...</span>
+          <button class="button button--secondary" type="button" data-marketplace-clear>Clear filters</button>
+        </div>
+      </div>
       <div class="market-grid market-grid--dense" data-public-listings></div>
       <div class="market-empty" data-market-empty hidden></div>
+      <nav class="pagination-row" aria-label="Marketplace pagination">
+        <a class="button button--secondary" href="products">Previous</a>
+        <span>Page 1</span>
+        <a class="button button--secondary" href="products">Next</a>
+      </nav>
+    </section>
+
+    <section class="editorial-section">
+      <div class="editorial-section__inner">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Buyer paths</span>
+            <h2 class="section-title">Three ways teams use Etch listings.</h2>
+          </div>
+        </div>
+        <div class="process-grid">
+          <article><span>01</span><h3>Shortlist assets</h3><p>Build a focused set of scripts, visuals, or sound options for review.</p></article>
+          <article><span>02</span><h3>Open requests</h3><p>Ask for access, availability, or commercial terms from the listing view.</p></article>
+          <article><span>03</span><h3>Compare fit</h3><p>Evaluate price, category, creator profile, and rights notes side by side.</p></article>
+          <article><span>04</span><h3>Move to deal</h3><p>Keep conversations and status visible as the buyer journey advances.</p></article>
+        </div>
+      </div>
     </section>
   </main>
   <div data-component="include" data-src="components/footer.html"></div>

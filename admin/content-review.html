@@ -13,34 +13,13 @@
     <div data-component="include" data-src="../components/admin-sidebar.html"></div>
 <main class="dashboard-main">
       <div data-component="include" data-src="../components/admin-topbar.html"></div>
-<section class="dashboard-grid">
-        <article class="dashboard-card dashboard-card--feature dashboard-card--admin">
-          <p class="dashboard-label">Review pipeline</p>
-          <h2>Keep marketplace content aligned with quality standards and licensing policy.</h2>
-          <p>Review new submissions, flag compliance issues, and route content to the right reviewer.</p>
-        </article>
-        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
-          <p class="dashboard-label">Pending assets</p>
-          <h3>24</h3>
-          <span>Awaiting review or category approval.</span>
-        </article>
-        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
-          <p class="dashboard-label">Requires changes</p>
-          <h3>8</h3>
-          <span>Assets with feedback requests.</span>
-        </article>
-      </section>
-      <section class="dashboard-card">
-        <div class="section-header"><h2>Recent review items</h2></div>
-        <div class="dashboard-list">
-          <div><strong>Neon Passage Boards</strong><span>Storyboard approval pending • IP rights flagged.</span></div>
-          <div><strong>Sync Beat Package</strong><span>Audio sample review in progress • technical checks.</span></div>
-          <div><strong>Script draft: Dawn Shift</strong><span>Genre classification review • sensitive themes detected.</span></div>
-        </div>
-      </section>
+<section class="dashboard-grid" data-dashboard-stats></section>
+      <section class="dashboard-card" data-dashboard-primary-list></section>
     </main>
   </div>
   <script src="../scripts/components.js"></script>
+  <script src="../scripts/ui.js"></script>
+  <script src="../scripts/api.js"></script>
   <script src="../scripts/dashboard.js"></script>
   <script src="../scripts/main.js"></script>
   <script src="../scripts/config.js"></script>

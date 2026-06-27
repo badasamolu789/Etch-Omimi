@@ -13,34 +13,13 @@
     <div data-component="include" data-src="../components/admin-sidebar.html"></div>
 <main class="dashboard-main">
       <div data-component="include" data-src="../components/admin-topbar.html"></div>
-<section class="dashboard-grid">
-        <article class="dashboard-card dashboard-card--feature dashboard-card--admin">
-          <p class="dashboard-label">Payment control</p>
-          <h2>Oversee escrow releases, payout approvals, and settlement timing.</h2>
-          <p>Keep all payment flows aligned with licensing agreements and buyer milestones.</p>
-        </article>
-        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
-          <p class="dashboard-label">Pending payouts</p>
-          <h3>11</h3>
-          <span>Payments waiting release.</span>
-        </article>
-        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
-          <p class="dashboard-label">Funds held</p>
-          <h3>$46,200</h3>
-          <span>Escrow reserves across active deals.</span>
-        </article>
-      </section>
-      <section class="dashboard-card">
-        <div class="section-header"><h2>Recent payout actions</h2></div>
-        <div class="dashboard-list">
-          <div><strong>Release approved</strong><span>City of Echoes delivery payout completed.</span></div>
-          <div><strong>Hold placed</strong><span>Sync license pending final legal signoff.</span></div>
-          <div><strong>Review payment</strong><span>Licensing request requires buyer confirmation.</span></div>
-        </div>
-      </section>
+<section class="dashboard-grid" data-dashboard-stats></section>
+      <section class="dashboard-card" data-dashboard-primary-list></section>
     </main>
   </div>
   <script src="../scripts/components.js"></script>
+  <script src="../scripts/ui.js"></script>
+  <script src="../scripts/api.js"></script>
   <script src="../scripts/dashboard.js"></script>
   <script src="../scripts/main.js"></script>
   <script src="../scripts/config.js"></script>

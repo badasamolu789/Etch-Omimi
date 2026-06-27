@@ -13,41 +13,13 @@
     <div data-component="include" data-src="../components/admin-sidebar.html"></div>
 <main class="dashboard-main">
       <div data-component="include" data-src="../components/admin-topbar.html"></div>
-<section class="dashboard-grid">
-        <article class="dashboard-card dashboard-card--feature dashboard-card--admin">
-          <p class="dashboard-label">User oversight</p>
-          <h2>Review member status, permissions, and activity in a single admin workspace.</h2>
-          <p>Manage creator, buyer, and admin accounts with clarity and security controls.</p>
-        </article>
-        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
-          <p class="dashboard-label">Active users</p>
-          <h3>420</h3>
-          <span>Total marketplace participants.</span>
-        </article>
-        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
-          <p class="dashboard-label">New signups</p>
-          <h3>28</h3>
-          <span>Users joined in the last 7 days.</span>
-        </article>
-      </section>
-      <section class="dashboard-card">
-        <div class="section-header"><h2>User list</h2></div>
-        <div class="table-shell">
-          <table class="dashboard-table">
-            <thead>
-              <tr><th>Name</th><th>Role</th><th>Status</th><th>Joined</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Oma A.</td><td>Creator</td><td><span class="status-pill status-pill--live">Active</span></td><td>Jan 16</td></tr>
-              <tr><td>Casey N.</td><td>Buyer</td><td><span class="status-pill status-pill--pending">Pending</span></td><td>Jun 02</td></tr>
-              <tr><td>Kam R.</td><td>Creator</td><td><span class="status-pill status-pill--live">Active</span></td><td>May 21</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+<section class="dashboard-grid" data-dashboard-stats></section>
+      <section class="dashboard-card" data-dashboard-primary-list></section>
     </main>
   </div>
   <script src="../scripts/components.js"></script>
+  <script src="../scripts/ui.js"></script>
+  <script src="../scripts/api.js"></script>
   <script src="../scripts/dashboard.js"></script>
   <script src="../scripts/main.js"></script>
   <script src="../scripts/config.js"></script>

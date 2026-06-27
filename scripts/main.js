@@ -387,6 +387,7 @@ function renderMarketCard(listing, index = 0) {
         <div class="market-card__chips">
           ${listing.category ? `<span class="meta-pill">${listing.category}</span>` : ""}
           ${listing.rights_summary ? `<span class="meta-pill">${listing.rights_summary}</span>` : ""}
+          ${listing.views_count ? `<span class="meta-pill">${new Intl.NumberFormat("en", { notation: "compact" }).format(listing.views_count)} views</span>` : ""}
         </div>
       </div>
       <div class="market-card__footer">
@@ -492,22 +493,71 @@ async function hydratePublicListings() {
   const searchGrid = document.querySelector("[data-search-results]");
   if (!marketGrid && !searchGrid) return;
 
-  const query = new URLSearchParams(window.location.search).get("q") || "";
+  const params = new URLSearchParams(window.location.search);
+  const toolbar = document.querySelector("[data-marketplace-toolbar]");
+  const query = toolbar?.querySelector("[name='q']")?.value || params.get("q") || "";
+  const category = toolbar?.querySelector("[data-marketplace-category]")?.value || "";
+  const license = toolbar?.querySelector("[data-marketplace-license]")?.value || "";
+  const industry = toolbar?.querySelector("[data-marketplace-industry]")?.value || "";
+  const price = toolbar?.querySelector("[data-marketplace-price]")?.value || "";
+  const sort = toolbar?.querySelector("[data-marketplace-sort]")?.value || "newest";
+  const countLabel = document.querySelector("[data-marketplace-count]");
   const target = marketGrid || searchGrid;
   target.innerHTML = skeletonMarketCards(searchGrid ? 3 : 6);
+  if (countLabel) countLabel.textContent = "Loading listings...";
 
   try {
-    const listings = await window.EtchApi.getPublicListings({ limit: searchGrid ? 12 : 24, search: query });
+    const listings = await window.EtchApi.getPublicListings({
+      limit: searchGrid ? 12 : 24,
+      search: query,
+      category,
+      license,
+      industry,
+      price,
+      sort,
+    });
     if (!listings.length) {
       target.innerHTML = window.EtchUI.emptyState("No listings found", "Try another search or browse all marketplace categories.", "Browse all", "products");
+      if (countLabel) countLabel.textContent = "0 listings found";
       return;
     }
     target.innerHTML = listings.map(searchGrid ? renderResultCard : renderMarketCard).join("");
+    if (countLabel) countLabel.textContent = `${listings.length} listing${listings.length === 1 ? "" : "s"} shown`;
     document.querySelector("[data-market-empty]")?.setAttribute("hidden", "");
   } catch (error) {
     showCollectionError(target, error.message || "Listings could not be loaded.");
+    if (countLabel) countLabel.textContent = "Unable to load listings";
     window.EtchUI?.toast(error.message || "Listings could not be loaded.", "error");
   }
+}
+
+function initMarketplaceToolbar() {
+  const toolbar = document.querySelector("[data-marketplace-toolbar]");
+  if (!toolbar) return;
+  const searchForm = toolbar.querySelector("[data-marketplace-search]");
+  const clearButton = toolbar.querySelector("[data-marketplace-clear]");
+
+  searchForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    window.EtchApi?.clearCache("public-listings");
+    hydratePublicListings();
+  });
+
+  toolbar.querySelectorAll("select").forEach((select) => {
+    select.addEventListener("change", () => {
+      window.EtchApi?.clearCache("public-listings");
+      hydratePublicListings();
+    });
+  });
+
+  clearButton?.addEventListener("click", () => {
+    searchForm?.reset();
+    toolbar.querySelectorAll("select").forEach((select) => {
+      select.selectedIndex = 0;
+    });
+    window.EtchApi?.clearCache("public-listings");
+    hydratePublicListings();
+  });
 }
 
 async function hydrateFeaturedCreators() {
@@ -598,6 +648,7 @@ async function hydrateRelatedListings() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  initMarketplaceToolbar();
   hydratePublicListings();
   hydrateFeaturedCreators();
   hydrateHeroStats();

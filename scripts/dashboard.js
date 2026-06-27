@@ -107,7 +107,103 @@
     const isUserDashboard = path.includes("/user/dashboard");
     const isAdminDashboard = path.includes("/admin/dashboard");
     const isListings = path.includes("/user/listings");
-    if (!isUserDashboard && !isAdminDashboard && !isListings) return;
+    const creatorQueueMap = {
+      "/user/storefront": {
+        loader: (session) => window.EtchApi.getCreatorStorefront(session.user.id),
+        feature: {
+          label: "Storefront pulse",
+          title: "Polish your storefront presentation to increase buyer confidence.",
+          copy: "Optimize categories, hero assets, and live visibility from a clean storefront overview.",
+        },
+        listTitle: "Top storefront assets",
+        emptyCopy: "Live storefront assets will appear here once your listings are published.",
+      },
+      "/user/messages": {
+        loader: (session) => window.EtchApi.getCreatorMessages(session.user.id),
+        feature: {
+          label: "Workspace communication",
+          title: "Respond quickly to buyers, collaborators, and licensing conversations.",
+          copy: "Messages are grouped by urgency so you can prioritize requests from buyers and production partners.",
+        },
+        listTitle: "Recent messages",
+        emptyCopy: "Buyer conversations will appear here once inquiries arrive.",
+      },
+      "/user/licensing": {
+        loader: (session) => window.EtchApi.getCreatorLicensing(session.user.id),
+        feature: {
+          label: "Deal pipeline",
+          title: "Manage licensing requests, proposals, and approvals from a central work feed.",
+          copy: "Keep negotiations transparent and move each request through a clear approval path.",
+        },
+        listTitle: "Recent licensing activity",
+        emptyCopy: "Licensing requests will appear here after buyers contact you.",
+      },
+      "/user/sales-earnings": {
+        loader: (session) => window.EtchApi.getCreatorEarnings(session.user.id),
+        feature: {
+          label: "Earnings outlook",
+          title: "See revenue, payouts, and performance in a single workspace.",
+          copy: "Review income, payout state, and license value without leaving your CMS.",
+        },
+        listTitle: "Revenue timeline",
+        emptyCopy: "Sales and payout activity will appear here after your first completed license.",
+      },
+    };
+    const adminQueueMap = {
+      "/admin/content-review": {
+        type: "content",
+        feature: {
+          label: "Review pipeline",
+          title: "Keep marketplace content aligned with quality standards and licensing policy.",
+          copy: "Review new submissions, flag compliance issues, and route content to the right reviewer.",
+        },
+        listTitle: "Recent review items",
+        emptyCopy: "Review items will appear here when creators submit listings.",
+      },
+      "/admin/licensing-queue": {
+        type: "licensing",
+        feature: {
+          label: "Queue overview",
+          title: "Monitor licensing demand, approvals, and request age.",
+          copy: "Sort requests by status and assign tickets to compliance or fulfillment teams.",
+        },
+        listTitle: "Active licensing requests",
+        emptyCopy: "Licensing requests will appear here when buyers contact creators.",
+      },
+      "/admin/escrow-payouts": {
+        type: "payouts",
+        feature: {
+          label: "Payment control",
+          title: "Oversee escrow releases, payout approvals, and settlement timing.",
+          copy: "Keep all payment flows aligned with licensing agreements and buyer milestones.",
+        },
+        listTitle: "Recent payout actions",
+        emptyCopy: "Pending payouts will appear here when payment records are created.",
+      },
+      "/admin/support-inbox": {
+        type: "support",
+        feature: {
+          label: "Support queue",
+          title: "Track open tickets and resolve issues for creators and buyers.",
+          copy: "Prioritize responses and keep support requests flowing through a structured process.",
+        },
+        listTitle: "Recent inquiries",
+        emptyCopy: "Support tickets will appear here when users request help.",
+      },
+      "/admin/users": {
+        type: "users",
+        feature: {
+          label: "User oversight",
+          title: "Review member status, permissions, and activity in a single admin workspace.",
+          copy: "Manage creator, buyer, and admin accounts with clarity and security controls.",
+        },
+        listTitle: "User list",
+        emptyCopy: "User profiles will appear here after account creation.",
+      },
+    };
+    const creatorQueue = Object.entries(creatorQueueMap).find(([key]) => path.includes(key))?.[1];
+    const adminQueue = Object.entries(adminQueueMap).find(([key]) => path.includes(key))?.[1];
+    if (!isUserDashboard && !isAdminDashboard && !isListings && !creatorQueue && !adminQueue) return;
 
     const heroGrid = document.querySelector("[data-dashboard-stats]");
     const primaryList = document.querySelector("[data-dashboard-primary-list]");
@@ -138,6 +234,13 @@
         return;
       }
 
+      if (adminQueue) {
+        const dashboard = await window.EtchApi.getAdminWorkQueue(adminQueue.type);
+        renderStats(heroGrid, dashboard.stats, { admin: true, feature: adminQueue.feature });
+        renderList(primaryList, adminQueue.listTitle, dashboard.items, adminQueue.emptyCopy);
+        return;
+      }
+
       if (isListings) {
         const rows = await window.EtchApi.listCreatorListings(session.user.id);
         renderListingsTable(listingsTable, rows);
@@ -153,6 +256,13 @@
             copy: "Review active assets, update availability, and keep your catalog polished.",
           },
         });
+        return;
+      }
+
+      if (creatorQueue) {
+        const dashboard = await creatorQueue.loader(session);
+        renderStats(heroGrid, dashboard.stats, { feature: creatorQueue.feature });
+        renderList(primaryList, creatorQueue.listTitle, dashboard.items, creatorQueue.emptyCopy);
         return;
       }
 
