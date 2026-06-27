@@ -1,0 +1,4 @@
+# Ignore markdown working files and documentation drafts
+*.md
+!README.md
+!docs/**

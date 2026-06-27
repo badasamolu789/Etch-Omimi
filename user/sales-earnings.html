@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sales & Earnings | Etch Creator Dashboard</title>
+  <meta name="description" content="Monitor your Etch sales, revenue, and payout details in one place." />
+  <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <div data-component="include" data-src="../components/user-sidebar.html"></div>
+<main class="dashboard-main">
+      <div data-component="include" data-src="../components/user-topbar.html"></div>
+<section class="dashboard-grid">
+        <article class="dashboard-card dashboard-card--feature">
+          <p class="dashboard-label">Earnings outlook</p>
+          <h2>See revenue, payouts, and performance in a single workspace.</h2>
+          <p>Choose when to transfer payments, review income trends, and track license value.</p>
+        </article>
+        <article class="dashboard-card dashboard-card--compact">
+          <p class="dashboard-label">This month</p>
+          <h3>$14,200</h3>
+          <span>Net creator revenue.</span>
+        </article>
+        <article class="dashboard-card dashboard-card--compact">
+          <p class="dashboard-label">Pending payout</p>
+          <h3>$3,600</h3>
+          <span>Awaiting release after buyer approval.</span>
+        </article>
+      </section>
+      <section class="dashboard-card">
+        <div class="section-header"><h2>Revenue timeline</h2></div>
+        <div class="dashboard-list">
+          <div><strong>April</strong><span>$8,100 • 14 bookings</span></div>
+          <div><strong>May</strong><span>$11,250 • 18 bookings</span></div>
+          <div><strong>June</strong><span>$14,200 • 23 bookings</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../scripts/components.js"></script>
+  <script src="../scripts/dashboard.js"></script>
+  <script src="../scripts/main.js"></script>
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/supabase.js"></script>
+  <script src="../scripts/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In | Etch by OMIMI</title>
+    <meta name="description"
+        content="Sign in to Etch by OMIMI and continue your premium creative marketplace activity." />
+    <meta name="keywords" content="Etch sign in, creative marketplace login" />
+    <meta name="theme-color" content="#99A96A" />
+    <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../assets/logo/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body class="bg-mist text-ink font-body auth-screen">
+    <main class="auth-screen__main">
+        <div class="auth-card auth-card--highlight auth-card--centered">
+            <div class="auth-card__brand">
+                <a href="../index" class="brand-mark auth-brand">
+                    <img class="brand-mark__logo" src="../img/logo/logo.png" alt="Etch by OMIMI logo" />
+                    <span><strong>Etch</strong><small>by OMIMI</small></span>
+                </a>
+            </div>
+            <span class="eyebrow">Sign in</span>
+            <h1 class="section-title">Welcome back</h1>
+            <form class="auth-form" data-signin-form>
+                <label>
+                    Email address
+                    <input type="email" name="email" placeholder="you@example.com" required />
+                </label>
+                <label>
+                    Password
+                    <input type="password" name="password" placeholder="Create password" required />
+                </label>
+                <div class="form-row">
+                    <label class="inline-form">
+                        <input type="checkbox" name="remember" /> Remember me
+                    </label>
+                    <a href="forgot-password" class="text-gold">Forgot password?</a>
+                </div>
+                <button class="button button--primary" type="submit" data-signin-button>Sign In</button>
+                <p class="form-feedback" data-signin-feedback></p>
+            </form>
+            <p class="mt-6 text-slate">New to Etch? <a href="signup" class="text-gold">Create an account</a></p>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/ui.js"></script>
+    <script src="../scripts/config.js"></script>
+  <script src="../scripts/supabase.js"></script>
+    <script src="../scripts/auth.js"></script>
+</body>
+
+</html>

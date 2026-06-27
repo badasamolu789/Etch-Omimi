@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Storefront | Etch Creator Dashboard</title>
+  <meta name="description" content="Manage your storefront and featured assets in the Etch creator dashboard." />
+  <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <div data-component="include" data-src="../components/user-sidebar.html"></div>
+<main class="dashboard-main">
+      <div data-component="include" data-src="../components/user-topbar.html"></div>
+<section class="dashboard-grid">
+        <article class="dashboard-card dashboard-card--feature">
+          <p class="dashboard-label">Storefront pulse</p>
+          <h2>Polish your storefront presentation to increase buyer confidence.</h2>
+          <p>Optimize categories, hero assets, and live visibility from a clean storefront overview.</p>
+        </article>
+        <div class="dashboard-summary-grid">
+          <article class="dashboard-card dashboard-card--compact">
+            <p class="dashboard-label">Live assets</p>
+            <h3>18</h3>
+            <span>Active items shown to buyers.</span>
+          </article>
+          <article class="dashboard-card dashboard-card--compact">
+            <p class="dashboard-label">Featured slots</p>
+            <h3>4</h3>
+            <span>Premium placements currently in use.</span>
+          </article>
+          <article class="dashboard-card dashboard-card--compact">
+            <p class="dashboard-label">Improvement score</p>
+            <h3>92%</h3>
+            <span>Quality and category alignment.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="dashboard-columns">
+        <article class="dashboard-card">
+          <div class="dashboard-card__header">
+            <h3>Top storefront assets</h3>
+            <span class="meta-pill">Insight</span>
+          </div>
+          <div class="dashboard-list">
+            <div>
+              <strong>City of Echoes</strong>
+              <span>Most buyer clicks this week • sync-ready</span>
+            </div>
+            <div>
+              <strong>Neon Passage Boards</strong>
+              <span>Highest preview engagement • commercial license</span>
+            </div>
+            <div>
+              <strong>Tomorrow's Chorus</strong>
+              <span>Strongest outreach response • bespoke score</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="dashboard-card">
+          <div class="section-header"><h2>Storefront actions</h2></div>
+          <div class="dashboard-list">
+            <div><strong>Review storefront layout</strong><span>Update hero sections and visibility rules.</span></div>
+            <div><strong>Refresh cover images</strong><span>Keep featured assets visually sharp.</span></div>
+            <div><strong>Adjust discovery tags</strong><span>Align categories with current demand.</span></div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+  <script src="../scripts/components.js"></script>
+  <script src="../scripts/dashboard.js"></script>
+  <script src="../scripts/main.js"></script>
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/supabase.js"></script>
+  <script src="../scripts/auth.js"></script>
+</body>
+</html>

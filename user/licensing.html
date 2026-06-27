@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Licensing | Etch Creator Dashboard</title>
+  <meta name="description" content="Track licensing requests, offers, and status updates in your creator dashboard." />
+  <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <div data-component="include" data-src="../components/user-sidebar.html"></div>
+<main class="dashboard-main">
+      <div data-component="include" data-src="../components/user-topbar.html"></div>
+<section class="dashboard-grid">
+        <article class="dashboard-card dashboard-card--feature">
+          <p class="dashboard-label">Deal pipeline</p>
+          <h2>Manage licensing requests, proposals, and approvals from a central work feed.</h2>
+          <p>Keep negotiations transparent and move each request through a clear approval path.</p>
+        </article>
+        <article class="dashboard-card dashboard-card--compact">
+          <p class="dashboard-label">Open requests</p>
+          <h3>12</h3>
+          <span>Licensing contacts waiting for review.</span>
+        </article>
+        <article class="dashboard-card dashboard-card--compact">
+          <p class="dashboard-label">Approved</p>
+          <h3>7</h3>
+          <span>Confirmed licensing agreements.</span>
+        </article>
+      </section>
+      <section class="dashboard-card">
+        <div class="section-header"><h2>Recent licensing activity</h2></div>
+        <div class="dashboard-list">
+          <div><strong>City of Echoes</strong><span>Proposal sent • waiting on buyer approval</span></div>
+          <div><strong>Neon Passage Boards</strong><span>License accepted • delivery due in 2 days</span></div>
+          <div><strong>Tomorrow's Chorus</strong><span>Offer updated • negotiations active</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../scripts/components.js"></script>
+  <script src="../scripts/dashboard.js"></script>
+  <script src="../scripts/main.js"></script>
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/supabase.js"></script>
+  <script src="../scripts/auth.js"></script>
+</body>
+</html>

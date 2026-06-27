@@ -1,64 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Explore | Etch by OMIMI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = { theme: { extend: { colors: { ink: "#1A1A1A", mist: "#F9F9F7", gold: "#99A96A", ember: "#6F7D49", pine: "#4A5433", slate: "#5F654D", cloud: "#D4DBC2" }, fontFamily: { display: ['"Outfit"', "Avenir Next", "Century Gothic", "Arial", "sans-serif"], body: ['"Outfit"', "Avenir Next", "Century Gothic", "Arial", "sans-serif"] } } } };
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body class="bg-mist text-ink font-body">
-    <header class="site-header">
-      <nav class="nav-shell mx-auto max-w-[1600px] px-4 py-5 sm:px-5 lg:px-6">
-        <a href="index.html" class="brand-mark"><img class="brand-mark__logo" src="img/logo/logo.png" alt="Etch by OMIMI logo" /><span><strong>Etch</strong><small>by OMIMI</small></span></a>
-        <button class="mobile-toggle lg:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" data-mobile-toggle><span></span><span></span></button>
-        <div class="nav-center hidden lg:flex">
-          <a class="nav-link" href="index.html">Home</a>
-          <a class="nav-link nav-link--active" href="explore.html">Explore</a>
-          <a class="nav-link" href="products.html">Products</a>
-          <a class="nav-link" href="about.html">About</a>
-          <a class="nav-link" href="contact.html">Contact</a>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore | Etch by OMIMI</title>
+  <meta name="description"
+    content="Browse curated creative works, featured collections, and premium categories on Etch by OMIMI." />
+  <meta name="keywords"
+    content="explore creative marketplace, premium script catalog, storyboard browsing, creative discovery" />
+  <meta name="theme-color" content="#99A96A" />
+  <link rel="canonical" href="https://etchbyomimi.com/explore" />
+  <link rel="icon" href="assets/logo/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/logo/logo.png" />
+  <meta property="og:title" content="Explore | Etch by OMIMI" />
+  <meta property="og:description"
+    content="Browse curated creative works, featured collections, and premium categories on Etch by OMIMI." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/logo/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Explore | Etch by OMIMI" />
+  <meta name="twitter:description"
+    content="Browse curated creative works, featured collections, and premium categories on Etch by OMIMI." />
+  <meta name="twitter:image" content="assets/logo/logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { ink: "#1A1A1A", mist: "#F9F9F7", gold: "#99A96A", ember: "#6F7D49", pine: "#4A5433", slate: "#5F654D", cloud: "#D4DBC2" }, fontFamily: { display: ['"Outfit"', "Avenir Next", "Century Gothic", "Arial", "sans-serif"], body: ['"Outfit"', "Avenir Next", "Century Gothic", "Arial", "sans-serif"] } } } };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-mist text-ink font-body">
+  <div data-component="include" data-src="components/landing-header.html"></div>
+  <main>
+    <section class="page-hero">
+      <div class="page-hero__inner">
+        <div class="page-hero__copy">
+          <span class="eyebrow">Explore</span>
+          <h1 class="font-display page-hero__title">Discover curated creative work.</h1>
+          <p class="page-hero__copy-text">
+            Browse premium listings, featured collections, and creator spotlights built for confident production
+            decisions.
+          </p>
         </div>
-        <div class="nav-actions hidden lg:flex">
-          <form class="nav-search" role="search" action="search.html" method="get"><input type="search" name="q" placeholder="Search scripts, songs, storyboards" aria-label="Search" /></form>
-          <a class="button button--primary" href="signin.html">Log in</a>
-          <a class="nav-avatar" href="user-dashboard.html" aria-label="Open account"><span class="nav-avatar__badge">OA</span><span class="nav-avatar__meta"><strong>Oma A.</strong><small>Collector</small></span></a>
-        </div>
-      </nav>
-      <div id="mobile-menu" class="mobile-menu lg:hidden" hidden><div class="mobile-menu__top"><span class="mobile-menu__title">Menu</span><button class="mobile-menu__close" type="button" data-mobile-close aria-label="Close menu">×</button></div>
-        <div class="mobile-menu__account"><a class="nav-avatar" href="user-dashboard.html" aria-label="Open account"><span class="nav-avatar__badge">OA</span><span class="nav-avatar__meta"><strong>Oma A.</strong><small>Collector</small></span></a></div>
-        <a href="index.html">Home</a><a href="search.html">Search</a><a href="explore.html">Explore</a><a href="products.html">Products</a><a href="about.html">About</a><a href="contact.html">Contact</a><a href="signup.html">Sign up</a><div class="mobile-menu__actions"><a class="button button--primary" href="signin.html">Log in</a></div>
-      </div>
-    </header>
-    <main>
-      <section class="page-intro">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="page-intro__grid">
-            <div>
-              <span class="eyebrow">Explore</span>
-              <h1 class="section-title">Browse the marketplace.</h1>
-              <p class="mt-5 max-w-2xl text-lg leading-8 text-slate">Explore creators, curated collections, and high-intent categories designed for producers, music supervisors, and brand-side teams.</p>
+        <div class="page-hero__visual">
+          <div class="hero-banner-card showcase-card--primary showcase-card--visual">
+            <p>Featured discovery</p>
+            <h2>Luxury work. Clear licensing.</h2>
+            <div class="showcase-tags">
+              <span>Scripts</span>
+              <span>Sound</span>
+              <span>Storyboards</span>
             </div>
-            <figure class="section-banner"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="Creative team at work" loading="lazy" /></figure>
           </div>
         </div>
-      </section>
-      <section class="mx-auto max-w-7xl px-6 pb-20 lg:px-8">
-        <div class="section-heading"><div><span class="eyebrow">Creator spotlight</span><h2 class="section-title">Featured voices.</h2></div></div>
-        <div class="page-card-grid">
-          <article class="spotlight-card"><img class="spotlight-card__image" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80" alt="Creator portrait" loading="lazy" /><span class="eyebrow">Visual storyteller</span><h3>Daniel O.</h3><p class="text-slate leading-8">Storyboard artist and concept developer working across commercials and narrative productions.</p></article>
-          <article class="spotlight-card"><img class="spotlight-card__image" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80" alt="Creator portrait" loading="lazy" /><span class="eyebrow">Writer</span><h3>Amara K.</h3><p class="text-slate leading-8">Screenwriter focused on layered urban drama, youth culture, and globally adaptable stories.</p></article>
-          <article class="spotlight-card"><img class="spotlight-card__image" src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=900&q=80" alt="Creator portrait" loading="lazy" /><span class="eyebrow">Sound designer</span><h3>Kehinde A.</h3><p class="text-slate leading-8">Composer and jingle producer building sync-ready audio for advertising and film moments.</p></article>
+      </div>
+    </section>
+
+    <section class="carousel-section" aria-label="Featured collections carousel">
+      <div class="carousel-shell">
+        <div class="carousel-track">
+          <article class="carousel-card">
+            <span class="eyebrow">Premium scripts</span>
+            <h3>Story packages with production clarity.</h3>
+            <p>Browse narrative work that includes licensing terms, preview scenes, and premium writing credit.</p>
+          </article>
+          <article class="carousel-card">
+            <span class="eyebrow">Visual concepts</span>
+            <h3>Boards and motion treatments built to sell.</h3>
+            <p>Review visual frameworks that translate creative direction into production-ready scenes.</p>
+          </article>
+          <article class="carousel-card">
+            <span class="eyebrow">Audio design</span>
+            <h3>Sync-ready sound for branded projects.</h3>
+            <p>Find music and sound design with clear rights and premium production quality.</p>
+          </article>
+          <article class="carousel-card">
+            <span class="eyebrow">Creative strategy</span>
+            <h3>Concepts that support premium campaigns.</h3>
+            <p>Access assets designed to elevate brand storytelling and campaign momentum.</p>
+          </article>
         </div>
-      </section>
-    </main>
-    <footer class="site-footer site-footer--rich"><div class="mx-auto max-w-7xl px-6 lg:px-8"><div class="footer-panel"><div class="footer-grid"><div><a href="index.html" class="brand-mark brand-mark--footer"><img class="brand-mark__logo" src="img/logo/logo.png" alt="Etch by OMIMI logo" /><span><strong>Etch</strong><small>by OMIMI</small></span></a><p class="footer-copy mt-4">Explore premium talent, categories, and featured works with a cleaner discovery layer.</p></div><div><h3 class="footer-title">Platform</h3><div class="footer-stack"><a href="search.html">Search</a><a href="products.html">Products</a><a href="signup.html">Create account</a></div></div><div><h3 class="footer-title">Company</h3><div class="footer-stack"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="signin.html">Sign in</a></div></div><div><h3 class="footer-title">Community</h3><div class="footer-stack"><span>Instagram: @etch_by_omimi</span><span>TikTok: @etchbyomimi</span><span>Email: etchbyomimi@gmail.com</span></div></div></div><div class="footer-bottom"><span>Explore the marketplace with confidence.</span><span>Etch by OMIMI</span></div></div></div></footer>
-    <script src="app.js"></script>
-  </body>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Why Etch</span>
+          <h2 class="section-title">Built for buyers who move fast.</h2>
+        </div>
+      </div>
+      <div class="value-grid">
+        <article class="feature-tile">
+          <h3>Curated clarity</h3>
+          <p>Every listing is selected for quality, licensing ease, and production readiness.</p>
+        </article>
+        <article class="feature-tile">
+          <h3>Fast optioning</h3>
+          <p>Clear pricing and licensing details help you move from discovery to decision faster.</p>
+        </article>
+        <article class="feature-tile">
+          <h3>Premium support</h3>
+          <p>Dedicated collaboration tools and discovery workflows keep your team aligned.</p>
+        </article>
+        <article class="feature-tile">
+          <h3>Trusted IP</h3>
+          <p>High-quality work from vetted creators, built for buyers with tight production standards.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-6 pb-20 lg:px-8">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Creators</span>
+          <h2 class="section-title">Featured voices.</h2>
+        </div>
+      </div>
+      <div class="page-card-grid" data-featured-creators></div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Categories</span>
+          <h2 class="section-title">Luxury discovery in six pillars.</h2>
+        </div>
+      </div>
+      <div class="page-card-grid">
+        <article class="feature-tile">
+          <h3>Scripts</h3>
+          <p>High-intent story packages for film, episodic, and branded content.</p>
+        </article>
+        <article class="feature-tile">
+          <h3>Music</h3>
+          <p>Sync-ready pieces and commercial audio built for premium campaigns.</p>
+        </article>
+        <article class="feature-tile">
+          <h3>Storyboards</h3>
+          <p>Visual frameworks designed for directors, production teams, and marketing.</p>
+        </article>
+        <article class="feature-tile">
+          <h3>Art</h3>
+          <p>Concept and brand art that sets tone for projects and titles.</p>
+        </article>
+        <article class="feature-tile">
+          <h3>Copy</h3>
+          <p>Campaign messaging, scripts, and story notes with commercial precision.</p>
+        </article>
+        <article class="feature-tile">
+          <h3>Motion</h3>
+          <p>Branded visuals, loops, and motion concepts with cinematic polish.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <div data-component="include" data-src="components/footer.html"></div>
+  <script src="scripts/config.js"></script>
+  <script src="scripts/supabase.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/api.js"></script>
+  <script src="scripts/components.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
 </html>

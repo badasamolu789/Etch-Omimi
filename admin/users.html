@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Users | Etch Admin Dashboard</title>
+  <meta name="description" content="Manage creators and buyers in the Etch admin dashboard." />
+  <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="dashboard-body dashboard-body--admin">
+  <div class="dashboard-layout">
+    <div data-component="include" data-src="../components/admin-sidebar.html"></div>
+<main class="dashboard-main">
+      <div data-component="include" data-src="../components/admin-topbar.html"></div>
+<section class="dashboard-grid">
+        <article class="dashboard-card dashboard-card--feature dashboard-card--admin">
+          <p class="dashboard-label">User oversight</p>
+          <h2>Review member status, permissions, and activity in a single admin workspace.</h2>
+          <p>Manage creator, buyer, and admin accounts with clarity and security controls.</p>
+        </article>
+        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
+          <p class="dashboard-label">Active users</p>
+          <h3>420</h3>
+          <span>Total marketplace participants.</span>
+        </article>
+        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
+          <p class="dashboard-label">New signups</p>
+          <h3>28</h3>
+          <span>Users joined in the last 7 days.</span>
+        </article>
+      </section>
+      <section class="dashboard-card">
+        <div class="section-header"><h2>User list</h2></div>
+        <div class="table-shell">
+          <table class="dashboard-table">
+            <thead>
+              <tr><th>Name</th><th>Role</th><th>Status</th><th>Joined</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Oma A.</td><td>Creator</td><td><span class="status-pill status-pill--live">Active</span></td><td>Jan 16</td></tr>
+              <tr><td>Casey N.</td><td>Buyer</td><td><span class="status-pill status-pill--pending">Pending</span></td><td>Jun 02</td></tr>
+              <tr><td>Kam R.</td><td>Creator</td><td><span class="status-pill status-pill--live">Active</span></td><td>May 21</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../scripts/components.js"></script>
+  <script src="../scripts/dashboard.js"></script>
+  <script src="../scripts/main.js"></script>
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/supabase.js"></script>
+  <script src="../scripts/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creator Dashboard | Etch by OMIMI</title>
+    <meta name="description"
+        content="A premium creator dashboard for tracking listings, licensing, and storefront performance." />
+    <meta name="theme-color" content="#99A96A" />
+    <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+        <div data-component="include" data-src="../components/user-sidebar.html"></div>
+        <main class="dashboard-main">
+            <div data-component="include" data-src="../components/user-topbar.html"></div>
+            <section class="dashboard-grid" data-dashboard-stats>
+                <article class="dashboard-card dashboard-card--feature">
+                    <p class="dashboard-label">Loading dashboard</p>
+                    <h2>Fetching live creator performance metrics.</h2>
+                    <p>Live values will replace this placeholder once your dashboard data loads.</p>
+                </article>
+            </section>
+
+            <section class="dashboard-columns">
+                <article class="dashboard-card" data-dashboard-primary-list></article>
+                <article class="dashboard-card" data-dashboard-secondary-list></article>
+                <article class="dashboard-card">
+                    <div class="dashboard-card__header">
+                        <h3>Recent listings</h3>
+                        <span class="meta-pill">Live</span>
+                    </div>
+                    <div class="dashboard-list">
+                        <div>
+                            <strong>City of Echoes</strong>
+                            <span>Drama pilot • Standard sync and exclusive option available</span>
+                        </div>
+                        <div>
+                            <strong>Tomorrow's Chorus</strong>
+                            <span>Songwriting package • Preview active • 3 inquiries</span>
+                        </div>
+                        <div>
+                            <strong>Neon Passage Boards</strong>
+                            <span>Storyboard series • Commercial shortlist placement</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="dashboard-card">
+                    <div class="dashboard-card__header">
+                        <h3>Backend-ready state</h3>
+                    </div>
+                    <div class="dashboard-list">
+                        <div>
+                            <strong>Empty state</strong>
+                            <span>When no listings are saved yet, this card will guide the creator to upload their first
+                                item.</span>
+                        </div>
+                        <div>
+                            <strong>Live updates</strong>
+                            <span>Supabase data will populate cards, stats, and alerts as content arrives.</span>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+    <script src="../scripts/components.js"></script>
+    <script src="../scripts/ui.js"></script>
+    <script src="../scripts/api.js"></script>
+    <script src="../scripts/dashboard.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/config.js"></script>
+  <script src="../scripts/supabase.js"></script>
+    <script src="../scripts/auth.js"></script>
+</body>
+
+</html>

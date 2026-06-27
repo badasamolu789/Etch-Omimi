@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages | Etch Creator Dashboard</title>
+  <meta name="description" content="Stay on top of buyer messages and collaboration requests in your Etch dashboard." />
+  <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="dashboard-body">
+  <div class="dashboard-layout">
+    <div data-component="include" data-src="../components/user-sidebar.html"></div>
+<main class="dashboard-main">
+      <div data-component="include" data-src="../components/user-topbar.html"></div>
+<section class="dashboard-grid">
+        <article class="dashboard-card dashboard-card--feature">
+          <p class="dashboard-label">Workspace communication</p>
+          <h2>Respond quickly to buyers, collaborators, and licensing conversations.</h2>
+          <p>Messages are grouped by urgency so you can prioritize requests from buyers and production partners.</p>
+        </article>
+        <article class="dashboard-card dashboard-card--compact">
+          <p class="dashboard-label">Unread threads</p>
+          <h3>8</h3>
+          <span>New incoming messages.</span>
+        </article>
+        <article class="dashboard-card dashboard-card--compact">
+          <p class="dashboard-label">High priority</p>
+          <h3>3</h3>
+          <span>Time-sensitive buyer conversations.</span>
+        </article>
+      </section>
+      <section class="dashboard-card">
+        <div class="section-header"><h2>Recent messages</h2></div>
+        <div class="dashboard-list">
+          <div><strong>Amanda A.</strong><span>Requesting extended licensing terms for pilot screen use.</span></div>
+          <div><strong>Creative Ops</strong><span>Need updated asset previews for the sync package.</span></div>
+          <div><strong>Buyer team</strong><span>Asking for finish timeline and payout expectations.</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../scripts/components.js"></script>
+  <script src="../scripts/dashboard.js"></script>
+  <script src="../scripts/main.js"></script>
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/supabase.js"></script>
+  <script src="../scripts/auth.js"></script>
+</body>
+</html>

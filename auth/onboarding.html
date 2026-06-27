@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Onboarding | Etch by OMIMI</title>
+    <meta name="description" content="Complete your ETCH onboarding and set up your buyer or creator profile." />
+    <meta name="keywords" content="Etch onboarding, creative marketplace profile setup" />
+    <meta name="theme-color" content="#99A96A" />
+    <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../assets/logo/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body class="bg-mist text-ink font-body auth-screen">
+    <main class="auth-screen__main auth-screen__main--wide">
+        <div class="auth-card auth-card--highlight auth-card--centered auth-card--wide">
+            <div class="auth-card__brand">
+                <a href="../index" class="brand-mark auth-brand">
+                    <img class="brand-mark__logo" src="../img/logo/logo.png" alt="Etch by OMIMI logo" />
+                    <span><strong>Etch</strong><small>by OMIMI</small></span>
+                </a>
+            </div>
+            <span class="eyebrow">Onboarding</span>
+            <h1 class="section-title">Finish your profile</h1>
+            <form class="auth-form" data-onboarding-form>
+                <input type="hidden" name="role" value="buyer" data-role-input />
+                <div class="form-row">
+                    <label>
+                        Full name
+                        <input type="text" name="full_name" placeholder="Your full name" required />
+                    </label>
+                    <label>
+                        Country
+                        <input type="text" name="country" placeholder="Country" required />
+                    </label>
+                </div>
+                <div class="buyer-fields" data-buyer-fields>
+                    <label>
+                        Company / brand name
+                        <input type="text" name="company" placeholder="Company or brand" required />
+                    </label>
+                    <label>
+                        Primary creative need
+                        <input type="text" name="creative_need" placeholder="Example: film licensing, music sync"
+                            required />
+                    </label>
+                    <label>
+                        Budget range
+                        <select name="budget_range" required>
+                            <option value="">Select budget</option>
+                            <option value="500-2500">$500 - $2,500</option>
+                            <option value="2500-10000">$2,500 - $10,000</option>
+                            <option value="10000+">$10,000+</option>
+                        </select>
+                    </label>
+                    <label>
+                        Preferred categories
+                        <input type="text" name="preferred_categories" placeholder="Scripts, audio, visuals" required />
+                    </label>
+                </div>
+                <div class="creator-fields" data-creator-fields hidden>
+                    <label>
+                        Studio name
+                        <input type="text" name="studio_name" placeholder="Creator or studio name" required />
+                    </label>
+                    <label>
+                        Short bio
+                        <textarea name="bio" rows="4" placeholder="Describe your creative focus" required></textarea>
+                    </label>
+                    <label>
+                        Category specialization
+                        <input type="text" name="specialization" placeholder="Scripts, storyboards, audio" required />
+                    </label>
+                    <label>
+                        Portfolio link
+                        <input type="url" name="portfolio_link" placeholder="https://" />
+                    </label>
+                    <label>
+                        Profile image URL
+                        <input type="url" name="avatar_url" placeholder="Image URL" />
+                    </label>
+                </div>
+                <div class="form-row">
+                    <label class="inline-form">
+                        <input type="checkbox" name="payout_ready" /> I confirm I am ready to set up payout details
+                        later.
+                    </label>
+                </div>
+                <button class="button button--primary" type="submit">Complete onboarding</button>
+                <p class="form-feedback" data-onboarding-feedback></p>
+            </form>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/ui.js"></script>
+    <script src="../scripts/config.js"></script>
+  <script src="../scripts/supabase.js"></script>
+    <script src="../scripts/auth.js"></script>
+</body>
+
+</html>

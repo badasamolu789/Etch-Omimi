@@ -1,181 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search | Etch by OMIMI</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              ink: "#1A1A1A",
-              mist: "#F9F9F7",
-              gold: "#99A96A",
-              ember: "#6F7D49",
-              pine: "#4A5433",
-              slate: "#5F654D",
-              cloud: "#D4DBC2",
-            },
-            fontFamily: {
-              display: ['"Outfit"', "Avenir Next", "Century Gothic", "Arial", "sans-serif"],
-              body: ['"Outfit"', "Avenir Next", "Century Gothic", "Arial", "sans-serif"],
-            },
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search | Etch by OMIMI</title>
+  <meta name="description" content="Search the Etch by OMIMI marketplace for scripts, songs, storyboards, and premium creative assets." />
+  <meta name="keywords" content="search Etch, creative search, script search, licensed assets" />
+  <meta name="theme-color" content="#99A96A" />
+  <link rel="canonical" href="https://etchbyomimi.com/search" />
+  <link rel="icon" href="assets/logo/logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/logo/logo.png" />
+  <meta property="og:title" content="Search | Etch by OMIMI" />
+  <meta property="og:description" content="Search the Etch by OMIMI marketplace for scripts, songs, storyboards, and premium creative assets." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/logo/logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Search | Etch by OMIMI" />
+  <meta name="twitter:description" content="Search the Etch by OMIMI marketplace for scripts, songs, storyboards, and premium creative assets." />
+  <meta name="twitter:image" content="assets/logo/logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: "#1A1A1A",
+            mist: "#F9F9F7",
+            gold: "#99A96A",
+            ember: "#6F7D49",
+            pine: "#4A5433",
+            slate: "#5F654D",
+            cloud: "#D4DBC2",
+          },
+          fontFamily: {
+            display: ['"Outfit"', "Avenir Next", "Century Gothic", "Arial", "sans-serif"],
+            body: ['"Outfit"', "Avenir Next", "Century Gothic", "Arial", "sans-serif"],
           },
         },
-      };
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body class="bg-mist text-ink font-body">
-    <header class="site-header">
-      <nav class="nav-shell mx-auto max-w-[1600px] px-4 py-5 sm:px-5 lg:px-6">
-        <a href="index.html" class="brand-mark">
-          <img class="brand-mark__logo" src="img/logo/logo.png" alt="Etch by OMIMI logo" />
-          <span><strong>Etch</strong><small>by OMIMI</small></span>
-        </a>
-        <button class="mobile-toggle lg:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" data-mobile-toggle>
-          <span></span><span></span>
-        </button>
-        <div class="nav-center hidden lg:flex">
-          <a class="nav-link" href="index.html">Home</a>
-          <a class="nav-link" href="explore.html">Explore</a>
-          <a class="nav-link" href="products.html">Products</a>
-          <a class="nav-link" href="about.html">About</a>
-          <a class="nav-link" href="contact.html">Contact</a>
-        </div>
-        <div class="nav-actions hidden lg:flex">
-          <form class="nav-search" role="search" action="search.html" method="get">
-            <input type="search" name="q" placeholder="Search scripts, songs, storyboards" aria-label="Search" />
-          </form>
-          <a class="button button--primary" href="signin.html">Log in</a>
-          <a class="nav-avatar" href="user-dashboard.html" aria-label="Open account">
-            <span class="nav-avatar__badge">OA</span>
-            <span class="nav-avatar__meta"><strong>Oma A.</strong><small>Collector</small></span>
-          </a>
-        </div>
-      </nav>
-      <div id="mobile-menu" class="mobile-menu lg:hidden" hidden>
-          <div class="mobile-menu__top">
-            <span class="mobile-menu__title">Menu</span>
-            <button class="mobile-menu__close" type="button" data-mobile-close aria-label="Close menu">×</button>
-          </div>
-        <div class="mobile-menu__account">
-          <a class="nav-avatar" href="user-dashboard.html" aria-label="Open account">
-            <span class="nav-avatar__badge">OA</span>
-            <span class="nav-avatar__meta"><strong>Oma A.</strong><small>Collector</small></span>
-          </a>
-        </div>
-        <a href="index.html">Home</a>
-        <a href="search.html">Search</a>
-        <a href="explore.html">Explore</a>
-        <a href="products.html">Products</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="signup.html">Sign up</a>
-        <div class="mobile-menu__actions">
-          <a class="button button--primary" href="signin.html">Log in</a>
-        </div>
-      </div>
-    </header>
-    <main>
-      <section class="page-intro">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-          <div class="page-intro__grid">
-            <div>
-              <span class="eyebrow">Search</span>
-              <h1 class="section-title">Find the right creative fit.</h1>
-              <div class="page-utility mt-5">
-                <span class="meta-pill">Category</span>
-                <span class="meta-pill" data-search-query-label>All categories</span>
-              </div>
-              <p class="mt-5 max-w-2xl text-lg leading-8 text-slate">
-                Search vetted scripts, songs, visuals, and storyboards using a cleaner discovery workflow built for serious buyers and creative teams.
-              </p>
-            </div>
-            <figure class="section-banner">
-              <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80" alt="Creative search and review workspace" loading="lazy" />
-            </figure>
-          </div>
-        </div>
-      </section>
-      <section class="mx-auto grid max-w-7xl gap-6 px-6 pb-20 lg:grid-cols-[0.34fr_0.66fr] lg:px-8">
-        <aside class="filter-panel">
-          <span class="eyebrow">Filters</span>
-          <h2 class="section-title">Refine results</h2>
-          <div class="filter-list">
-            <div><strong>Category</strong><p class="text-slate" data-search-query-copy>Storyboards, scripts, sound, branded content</p></div>
-            <div><strong>License type</strong><p class="text-slate">Personal review, standard sync, exclusive option</p></div>
-            <div><strong>Budget range</strong><p class="text-slate">$500 to $10,000+</p></div>
-            <div><strong>Region</strong><p class="text-slate">Nigeria, Africa-wide, international</p></div>
-          </div>
-        </aside>
-        <div class="search-results-grid">
-          <article class="result-card">
-            <img class="result-card__image" src="https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=900&q=80" alt="Storyboard sheets on a table" loading="lazy" />
-            <div>
-              <span class="eyebrow">Featured result</span>
-              <h3 class="section-title !text-3xl">Frames of Resolve</h3>
-              <p class="mt-3 text-slate leading-8">A premium storyboard set for a high-tension commercial narrative, prepared with watermark protection and custom licensing options.</p>
-              <div class="result-meta">
-                <span class="meta-pill">Storyboard</span>
-                <span class="meta-pill">Exclusive option</span>
-                <span class="meta-pill">$2,800</span>
-              </div>
-            </div>
-          </article>
-          <article class="result-card">
-            <img class="result-card__image" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=80" alt="Creative team reviewing concepts" loading="lazy" />
-            <div>
-              <span class="eyebrow">Top match</span>
-              <h3 class="section-title !text-3xl">City Pulse Boards</h3>
-              <p class="mt-3 text-slate leading-8">A cinematic set of boards and visual planning assets built for urban drama, music video, and brand adaptation projects.</p>
-              <div class="result-meta">
-                <span class="meta-pill">Visuals</span>
-                <span class="meta-pill">Standard sync</span>
-                <span class="meta-pill">3 inquiries</span>
-              </div>
-            </div>
-          </article>
-          <article class="result-card">
-            <img class="result-card__image" src="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?auto=format&fit=crop&w=900&q=80" alt="Scriptwriting and content planning desk" loading="lazy" />
-            <div>
-              <span class="eyebrow">Client shortlist</span>
-              <h3 class="section-title !text-3xl">The Last Draft</h3>
-              <p class="mt-3 text-slate leading-8">A polished screenplay package with synopsis, rights notes, and a production-facing pitch deck for faster executive review.</p>
-              <div class="result-meta">
-                <span class="meta-pill">Script</span>
-                <span class="meta-pill">Personal review</span>
-                <span class="meta-pill">$1,400</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-    </main>
-    <footer class="site-footer site-footer--rich">
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-mist text-ink font-body">
+  <div data-component="include" data-src="components/landing-header.html"></div>
+  <main>
+    <section class="page-intro">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="footer-panel">
-          <div class="footer-grid">
-            <div>
-              <a href="index.html" class="brand-mark brand-mark--footer"><img class="brand-mark__logo" src="img/logo/logo.png" alt="Etch by OMIMI logo" /><span><strong>Etch</strong><small>by OMIMI</small></span></a>
-              <p class="footer-copy mt-4">Search, filter, shortlist, and move into licensing conversations with far less friction.</p>
+        <div class="page-intro__grid">
+          <div>
+            <span class="eyebrow">Search</span>
+            <h1 class="section-title">Find the right creative fit.</h1>
+            <div class="page-utility mt-5">
+              <span class="meta-pill">Category</span>
+              <span class="meta-pill" data-search-query-label>All categories</span>
             </div>
-            <div><h3 class="footer-title">Platform</h3><div class="footer-stack"><a href="explore.html">Explore</a><a href="products.html">Products</a><a href="signup.html">Create account</a></div></div>
-            <div><h3 class="footer-title">Company</h3><div class="footer-stack"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="signin.html">Sign in</a></div></div>
-            <div><h3 class="footer-title">Community</h3><div class="footer-stack"><span>Instagram: @etch_by_omimi</span><span>TikTok: @etchbyomimi</span><span>Email: etchbyomimi@gmail.com</span></div></div>
+            <p class="mt-5 max-w-2xl text-lg leading-8 text-slate">
+              Search vetted scripts, songs, visuals, and storyboards with a luxury discovery flow.
+            </p>
           </div>
-          <div class="footer-bottom"><span>Search built for premium creative discovery.</span><span>Etch by OMIMI</span></div>
+          <figure class="section-banner"><img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1200&q=80" alt="Creative search and review workspace" loading="lazy" /></figure>
         </div>
       </div>
-    </footer>
-    <script src="app.js"></script>
-  </body>
+    </section>
+
+    <section class="mx-auto grid max-w-7xl gap-6 px-6 pb-20 lg:grid-cols-[0.34fr_0.66fr] lg:px-8">
+      <aside class="filter-panel">
+        <span class="eyebrow">Filters</span>
+        <h2 class="section-title">Refine results</h2>
+        <div class="filter-list">
+          <div><strong>Category</strong><p class="text-slate" data-search-query-copy>Scripts, music, storyboards</p></div>
+          <div><strong>License</strong><p class="text-slate">Sync, non-exclusive, custom option</p></div>
+          <div><strong>Budget</strong><p class="text-slate">From modest to premium briefs</p></div>
+        </div>
+      </aside>
+      <div class="search-results-grid" data-search-results></div>
+    </section>
+  </main>
+  <div data-component="include" data-src="components/footer.html"></div>
+  <script src="scripts/config.js"></script>
+  <script src="scripts/supabase.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/api.js"></script>
+  <script src="scripts/components.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
 </html>

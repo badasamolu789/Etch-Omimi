@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support Inbox | Etch Admin Dashboard</title>
+  <meta name="description" content="Manage support tickets and assistance requests in the Etch admin dashboard." />
+  <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body class="dashboard-body dashboard-body--admin">
+  <div class="dashboard-layout">
+    <div data-component="include" data-src="../components/admin-sidebar.html"></div>
+<main class="dashboard-main">
+      <div data-component="include" data-src="../components/admin-topbar.html"></div>
+<section class="dashboard-grid">
+        <article class="dashboard-card dashboard-card--feature dashboard-card--admin">
+          <p class="dashboard-label">Support queue</p>
+          <h2>Track open tickets and resolve issues for creators and buyers.</h2>
+          <p>Prioritize responses and keep support requests flowing through a structured process.</p>
+        </article>
+        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
+          <p class="dashboard-label">Open tickets</p>
+          <h3>14</h3>
+          <span>Requests waiting a response.</span>
+        </article>
+        <article class="dashboard-card dashboard-card--compact dashboard-card--admin">
+          <p class="dashboard-label">Urgent</p>
+          <h3>4</h3>
+          <span>High-priority issues requiring action.</span>
+        </article>
+      </section>
+      <section class="dashboard-card">
+        <div class="section-header"><h2>Recent inquiries</h2></div>
+        <div class="dashboard-list">
+          <div><strong>License delivery</strong><span>Buyer needs confirmation after file handoff.</span></div>
+          <div><strong>Payout support</strong><span>Creator submitted a payout dispute for review.</span></div>
+          <div><strong>Access issue</strong><span>User reported login and license access error.</span></div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="../scripts/components.js"></script>
+  <script src="../scripts/dashboard.js"></script>
+  <script src="../scripts/main.js"></script>
+  <script src="../scripts/config.js"></script>
+  <script src="../scripts/supabase.js"></script>
+  <script src="../scripts/auth.js"></script>
+</body>
+</html>
