@@ -3,9 +3,104 @@
 
     function setFeedback(element, message, type = "error") {
         if (!element) return;
-        element.textContent = message;
+        element.textContent = normalizeMessage(message, type === "success" ? "Done." : "Something went wrong. Please try again.");
         element.classList.toggle("form-feedback--success", type === "success");
         element.classList.toggle("form-feedback--error", type !== "success");
+    }
+
+    function normalizeMessage(value, fallback) {
+        if (!value) return fallback;
+        if (typeof value === "string") {
+            const trimmed = value.trim();
+            return trimmed && trimmed !== "{}" ? trimmed : fallback;
+        }
+        if (typeof value === "object") {
+            const useful = value.message || value.error_description || value.error || value.msg || value.details || value.hint;
+            if (useful) return normalizeMessage(useful, fallback);
+            return fallback;
+        }
+        return String(value);
+    }
+
+    function errorDebugText(error) {
+        if (!error || typeof error !== "object") return "";
+        const parts = [];
+        const keys = new Set([
+            ...Object.keys(error),
+            ...Object.getOwnPropertyNames(error),
+            ...Object.getOwnPropertyNames(Object.getPrototypeOf(error) || {}),
+        ]);
+
+        keys.forEach((key) => {
+            if (["stack", "constructor"].includes(key)) return;
+            try {
+                const value = error[key];
+                if (typeof value === "string" || typeof value === "number") {
+                    parts.push(`${key}: ${value}`);
+                }
+            } catch (_err) {
+                // Some browser error properties throw when read.
+            }
+        });
+
+        return parts.join(" | ");
+    }
+
+    function authErrorMessage(error, fallback) {
+        const debug = errorDebugText(error);
+        const message = normalizeMessage(error, debug || fallback);
+        const raw = `${debug} ${JSON.stringify(error || {})}`.toLowerCase();
+        if (
+            raw.includes("redirect") ||
+            raw.includes("emailredirectto") ||
+            raw.includes("not allowed") ||
+            raw.includes("invalid")
+        ) {
+            return "Signup is blocked by Supabase redirect settings. Add http://127.0.0.1:5500/auth/confirm.html to Authentication > URL Configuration.";
+        }
+        if (
+            raw.includes("database") ||
+            raw.includes("saving new user") ||
+            raw.includes("authretryablefetcherror") ||
+            raw.includes("status: 500")
+        ) {
+            return "Supabase returned a signup server error. Check Auth Logs; if SMTP is enabled, use the exact SMTP host from your mail provider, without https:// or a port in the host field.";
+        }
+        if (raw.includes("already") || raw.includes("registered")) {
+            return "This email already has an Etch account. Please sign in instead, or use a fresh email for testing.";
+        }
+        return message;
+    }
+
+    function escapeHtml(value) {
+        return String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function showSignupConfirmation(email) {
+        const safeEmail = escapeHtml(email || "your email");
+        if (!window.EtchUI?.openDialog) return;
+
+        window.EtchUI.openDialog({
+            title: "Check your email",
+            content: `
+                <div class="auth-status">
+                    <span class="auth-status__icon" aria-hidden="true">+</span>
+                    <h3>Confirm your Etch account</h3>
+                    <p>We sent a confirmation link to <strong>${safeEmail}</strong>. Open the latest email from Etch, confirm your address, then continue your setup.</p>
+                    <p class="auth-status__note">If the link says expired, request a fresh signup email and use the newest message in your inbox.</p>
+                </div>
+            `,
+            actionLabel: "Go to sign in",
+            onAction(close) {
+                close();
+                (window.EtchRouter?.navigate || ((path) => { window.location.href = path; }))(ROUTES.authSignin);
+            },
+        });
     }
 
     async function handleSignIn(event) {
@@ -26,7 +121,8 @@
 
         if (error) {
             window.EtchUI?.setButtonLoading(form.querySelector("[data-signin-button]"), false);
-            setFeedback(feedback, error.message || "Unable to sign in.");
+            console.warn("Etch sign-in error:", error);
+            setFeedback(feedback, authErrorMessage(error, "Unable to sign in."));
             return;
         }
 
@@ -85,11 +181,13 @@
 
         if (error) {
             window.EtchUI?.setButtonLoading(form.querySelector("[data-signup-button]"), false);
-            setFeedback(feedback, error.message || "Unable to create account.");
+            console.warn("Etch signup error:", error);
+            setFeedback(feedback, authErrorMessage(error, "Unable to create account. Please check your Supabase auth settings and try again."));
             return;
         }
 
         if (data?.user) {
+            const hasSession = Boolean(data.session);
             const profile = {
                 id: data.user.id,
                 email,
@@ -99,20 +197,115 @@
                 created_at: new Date().toISOString(),
             };
 
-            const profileRes = await window.EtchSupabase.createProfile(profile);
-            if (profileRes.error) {
+            if (hasSession) {
+                const profileRes = await window.EtchSupabase.ensureProfile(profile);
+                if (profileRes.error) {
+                    window.EtchUI?.setButtonLoading(form.querySelector("[data-signup-button]"), false);
+                    console.warn("Etch profile setup error:", profileRes.error);
+                    setFeedback(feedback, authErrorMessage(profileRes.error, "Account created, but profile setup failed."));
+                    return;
+                }
+            } else {
                 window.EtchUI?.setButtonLoading(form.querySelector("[data-signup-button]"), false);
-                setFeedback(feedback, profileRes.error.message || "Account created, but profile setup failed.");
+                form.reset();
+                setFeedback(feedback, "Account created. Check your email to confirm your account before onboarding.", "success");
+                showSignupConfirmation(email);
                 return;
             }
-            setFeedback(feedback, "Account created. Continue to onboarding...", "success");
-            (window.EtchRouter?.navigate || ((path) => { window.location.href = path; }))(ROUTES.authOnboarding + "?role=" + encodeURIComponent(role));
+
+            setFeedback(feedback, "Account created. Opening your dashboard...", "success");
+            auth.redirectWithProfile(profile);
             return;
         }
 
         window.EtchUI?.setButtonLoading(form.querySelector("[data-signup-button]"), false);
         setFeedback(feedback, "Account creation completed but sign-in failed.");
     }
+
+    auth.handleConfirmationPage = async function handleConfirmationPage() {
+        const statusNode = document.querySelector("[data-confirm-status]");
+        const titleNode = document.querySelector("[data-confirm-title]");
+        const messageNode = document.querySelector("[data-confirm-message]");
+        const actionsNode = document.querySelector("[data-confirm-actions]");
+
+        function render(state, title, message, actions = "") {
+            if (statusNode) statusNode.dataset.state = state;
+            if (titleNode) titleNode.textContent = title;
+            if (messageNode) messageNode.textContent = message;
+            if (actionsNode) actionsNode.innerHTML = actions;
+        }
+
+        const searchParams = new URLSearchParams(window.location.search);
+        const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+        const error = searchParams.get("error_description") || hashParams.get("error_description");
+
+        if (error) {
+            render(
+                "error",
+                "Link expired",
+                error.replace(/\+/g, " "),
+                `<a class="button button--primary" href="signup">Create account again</a><a class="button button--secondary" href="signin">Sign in</a>`
+            );
+            return;
+        }
+
+        render("loading", "Confirming email", "Please wait while Etch verifies your account.");
+
+        const client = await window.EtchSupabase.getClient();
+        if (!client) {
+            render("error", "Supabase not configured", "Add your Supabase URL and anon key before confirming accounts.");
+            return;
+        }
+
+        const code = searchParams.get("code");
+        if (code && client.auth.exchangeCodeForSession) {
+            const { error: exchangeError } = await client.auth.exchangeCodeForSession(code);
+            if (exchangeError) {
+                render(
+                    "error",
+                    "Could not confirm",
+                    exchangeError.message || "The confirmation link could not be verified.",
+                    `<a class="button button--primary" href="signup">Request a new link</a>`
+                );
+                return;
+            }
+        }
+
+        const session = await window.EtchSupabase.getSession();
+        if (!session?.user) {
+            render(
+                "error",
+                "Confirmation needed",
+                "Your link may have expired or already been used. Please sign in, or create the account again to receive a fresh email.",
+                `<a class="button button--primary" href="signin">Sign in</a><a class="button button--secondary" href="signup">Create account</a>`
+            );
+            return;
+        }
+
+        const metadata = session.user.user_metadata || {};
+        const profileRes = await window.EtchSupabase.ensureProfile({
+            id: session.user.id,
+            email: session.user.email || "",
+            role: metadata.role || "buyer",
+            full_name: metadata.full_name || session.user.email?.split("@")[0] || "Etch user",
+            onboarding_complete: false,
+            created_at: new Date().toISOString(),
+        });
+        const profile = profileRes.data || {
+            id: session.user.id,
+            email: session.user.email || "",
+            role: metadata.role || "buyer",
+            full_name: metadata.full_name || "Etch user",
+        };
+
+        render(
+            "success",
+            "Email confirmed",
+            "Your Etch account is ready. Opening your dashboard now.",
+            `<a class="button button--primary" href="${profile.role === "admin" ? "../admin/dashboard" : "../user/dashboard"}">Open dashboard</a><a class="button button--secondary" href="../index">Back home</a>`
+        );
+        window.setTimeout(() => auth.redirectWithProfile(profile), 1200);
+    };
 
     async function handleForgotPassword(event) {
         event.preventDefault();
@@ -208,6 +401,7 @@
         const signupForm = document.querySelector("[data-signup-form]");
         const forgotForm = document.querySelector("[data-forgot-form]");
         const onboardingForm = document.querySelector("[data-onboarding-form]");
+        const confirmStatus = document.querySelector("[data-confirm-status]");
         const roleInput = document.querySelector("[data-role-input]");
         const buyerFields = document.querySelector("[data-buyer-fields]");
         const creatorFields = document.querySelector("[data-creator-fields]");
@@ -240,6 +434,10 @@
 
             syncFields();
             onboardingForm.addEventListener("submit", handleOnboarding);
+        }
+
+        if (confirmStatus) {
+            auth.handleConfirmationPage();
         }
     };
 

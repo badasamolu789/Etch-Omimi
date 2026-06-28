@@ -97,7 +97,10 @@
         return client.auth.signUp({
             email,
             password,
-            options: { data: metadata },
+            options: {
+                data: metadata,
+                emailRedirectTo: `${window.location.origin}/auth/confirm.html`,
+            },
         });
     };
 
@@ -131,7 +134,21 @@
     namespace.createProfile = async function createProfile(profile) {
         const client = await namespace.getClient();
         if (!client) return { data: null, error: { message: "Supabase is not configured yet." } };
-        return client.from("profiles").upsert([{ ...profile }], { onConflict: "id" }).select().single();
+        return client.from("profiles").insert([{ ...profile }]).select().single();
+    };
+
+    namespace.ensureProfile = async function ensureProfile(profile) {
+        const existing = await namespace.getProfile(profile.id);
+        if (existing.data) return existing;
+        if (existing.error && existing.error.code && existing.error.code !== "PGRST116") {
+            return existing;
+        }
+
+        const created = await namespace.createProfile(profile);
+        if (created.error && /duplicate key/i.test(created.error.message || "")) {
+            return namespace.getProfile(profile.id);
+        }
+        return created;
     };
 
     namespace.updateProfile = async function updateProfile(profile) {

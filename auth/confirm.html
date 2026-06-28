@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirm Email | Etch by OMIMI</title>
+    <meta name="description" content="Confirm your Etch by OMIMI account email address." />
+    <meta name="theme-color" content="#99A96A" />
+    <link rel="icon" href="../assets/logo/logo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="../assets/logo/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body class="bg-mist text-ink font-body auth-screen">
+    <main class="auth-screen__main">
+        <section class="auth-card auth-card--highlight auth-card--centered" data-confirm-status data-state="loading">
+            <div class="auth-card__brand">
+                <a href="../index" class="brand-mark auth-brand">
+                    <img class="brand-mark__logo" src="../img/logo/logo.png" alt="Etch by OMIMI logo" />
+                    <span><strong>Etch</strong><small>by OMIMI</small></span>
+                </a>
+            </div>
+            <div class="auth-status auth-status--page">
+                <span class="auth-status__icon" aria-hidden="true">+</span>
+                <span class="eyebrow">Email confirmation</span>
+                <h1 class="section-title" data-confirm-title>Confirming email</h1>
+                <p data-confirm-message>Please wait while Etch verifies your account.</p>
+                <div class="auth-status__actions" data-confirm-actions></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/ui.js"></script>
+    <script src="../scripts/config.js"></script>
+    <script src="../scripts/supabase.js"></script>
+    <script src="../scripts/auth.js"></script>
+</body>
+
+</html>

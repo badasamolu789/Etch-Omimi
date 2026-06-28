@@ -1857,6 +1857,61 @@ a {
   line-height: 1.85;
 }
 
+.auth-status {
+  display: grid;
+  gap: 0.85rem;
+  text-align: center;
+}
+
+.auth-status--page {
+  place-items: center;
+}
+
+.auth-status__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  margin: 0 auto;
+  border-radius: 999px;
+  background: rgba(153, 169, 106, 0.2);
+  color: var(--pine);
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.auth-status p {
+  margin: 0;
+  color: var(--slate);
+  line-height: 1.7;
+}
+
+.auth-status__note {
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(153, 169, 106, 0.2);
+  border-radius: 18px;
+  background: rgba(153, 169, 106, 0.1);
+}
+
+.auth-status__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 0.35rem;
+}
+
+[data-confirm-status][data-state="error"] .auth-status__icon {
+  background: rgba(159, 47, 47, 0.12);
+  color: #9f2f2f;
+}
+
+[data-confirm-status][data-state="success"] .auth-status__icon {
+  background: rgba(153, 169, 106, 0.24);
+  color: var(--pine);
+}
+
 .auth-form {
   display: grid;
   gap: 1rem;
