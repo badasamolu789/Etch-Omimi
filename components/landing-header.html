@@ -8,15 +8,19 @@
       </span>
     </a>
 
+    <form class="top-mobile-search lg:hidden" role="search" action="search" method="get">
+      <input type="search" name="q" placeholder="Search" aria-label="Search listings" />
+    </form>
+
     <button class="mobile-toggle lg:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu" data-mobile-toggle>
       <span></span>
       <span></span>
     </button>
 
     <div class="nav-center hidden lg:flex">
-      <a class="nav-link nav-link--active" href="index">Home</a>
-      <a class="nav-link" href="explore">Explore</a>
-      <a class="nav-link" href="products">Products</a>
+      <a class="nav-link" href="index">Home</a>
+      <a class="nav-link" href="products">Marketplace</a>
+      <a class="nav-link" href="explore">Creators</a>
       <a class="nav-link" href="about">About</a>
       <a class="nav-link" href="contact">Contact</a>
     </div>
@@ -35,10 +39,14 @@
       <button class="mobile-menu__close" type="button" data-mobile-close aria-label="Close menu">×</button>
     </div>
     <div class="mobile-menu__account"></div>
+    <form class="mobile-search" role="search" action="search" method="get">
+      <input type="search" name="q" placeholder="Search listings" aria-label="Search listings" />
+      <button class="button button--primary" type="submit">Search</button>
+    </form>
     <a href="index">Home</a>
+    <a href="products">Marketplace</a>
+    <a href="explore">Creators</a>
     <a href="search">Search</a>
-    <a href="explore">Explore</a>
-    <a href="products">Products</a>
     <a href="about">About</a>
     <a href="contact">Contact</a>
     <a href="auth/signin">Log in</a>

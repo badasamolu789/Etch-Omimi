@@ -65,6 +65,10 @@
               Array.from(doc.body.children).forEach((node) => {
                 appendIncludeNode(node, mount);
               });
+
+              document.dispatchEvent(new CustomEvent("etch:include-loaded", {
+                detail: { src, mount },
+              }));
             })
             .catch((error) => {
               console.warn("Unable to load include", src, error);
@@ -100,9 +104,9 @@
 
   components.register("hero-stat-grid", (props) => {
     const items = props.items || [
-      { label: "Curated discovery", title: "Reviewed and ready to pitch.", subtitle: "Premium IP surfaced by category." },
-      { label: "Escrow-ready flow", title: "Secure commercial packaging.", subtitle: "Designer-ready terms and licensing." },
-      { label: "Creative velocity", title: "Fast project matching.", subtitle: "Discovery powered by intent signals." },
+      { label: "Curated discovery", title: "Review target under 48 hours.", subtitle: "Premium IP surfaced by category." },
+      { label: "Escrow-ready flow", title: "Held in trust until confirmed.", subtitle: "Every transaction is protected through delivery." },
+      { label: "Global outlook", title: "Built for rights-led teams.", subtitle: "Creators and buyers can work across markets." },
     ];
     return `<div class="grid grid-cols-1 gap-5 lg:grid-cols-3">${basicCards(items)}</div>`;
   });

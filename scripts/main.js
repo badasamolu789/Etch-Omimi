@@ -137,12 +137,176 @@ function handleInternalExtensionlessClicks(event) {
   }
 }
 
+function currentRouteKey() {
+  const route = normalizeRoute(window.location.pathname);
+  if (route === "/" || route === "/index") return "/index";
+  const firstSegment = route.split("/").filter(Boolean)[0] || "index";
+  return `/${firstSegment}`;
+}
+
+function linkRouteKey(link) {
+  const href = link.getAttribute("href");
+  if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:")) return "";
+  try {
+    const url = new URL(href, window.location.href);
+    const route = normalizeRoute(url.pathname);
+    if (route === "/" || route === "/index") return "/index";
+    const firstSegment = route.split("/").filter(Boolean)[0] || "index";
+    return `/${firstSegment}`;
+  } catch (error) {
+    return "";
+  }
+}
+
+function syncHeaderActiveState() {
+  const activeKey = currentRouteKey();
+  document.querySelectorAll(".site-header a[href]").forEach((link) => {
+    const linkKey = linkRouteKey(link);
+    const isActive = linkKey && linkKey === activeKey;
+    link.classList.toggle("nav-link--active", isActive && link.classList.contains("nav-link"));
+    link.classList.toggle("mobile-link--active", isActive && link.closest(".mobile-menu"));
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
+function bindHeaderInteractions() {
+  document.querySelectorAll("[data-mobile-toggle]").forEach((toggle) => {
+    if (toggle.dataset.boundMobileToggle === "true") return;
+    const menuId = toggle.getAttribute("aria-controls");
+    const menu = menuId ? document.getElementById(menuId) : document.getElementById("mobile-menu");
+    if (!menu) return;
+    toggle.dataset.boundMobileToggle = "true";
+
+    function setMobileMenuState(isOpen) {
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      menu.hidden = !isOpen;
+    }
+
+    toggle.addEventListener("click", () => {
+      const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+      setMobileMenuState(!isExpanded);
+    });
+
+    menu.querySelector("[data-mobile-close]")?.addEventListener("click", () => {
+      setMobileMenuState(false);
+    });
+
+    menu.querySelectorAll("a:not(.nav-avatar)").forEach((link) => {
+      link.addEventListener("click", () => setMobileMenuState(false));
+    });
+  });
+
+  syncHeaderActiveState();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   syncInternalLinkPaths();
   document.addEventListener("click", handleInternalExtensionlessClicks);
+  bindHeaderInteractions();
+  initPublicPageEnhancements();
 });
 
 window.EtchRouter = EtchRouter;
+
+function iconForText(text = "") {
+  const normalized = text.toLowerCase();
+  if (normalized.includes("script") || normalized.includes("story")) return "file-text";
+  if (normalized.includes("music") || normalized.includes("audio") || normalized.includes("sync")) return "music-2";
+  if (normalized.includes("board") || normalized.includes("visual") || normalized.includes("art")) return "image";
+  if (normalized.includes("motion") || normalized.includes("film") || normalized.includes("television")) return "clapperboard";
+  if (normalized.includes("copy") || normalized.includes("campaign") || normalized.includes("brand")) return "pen-line";
+  if (normalized.includes("license") || normalized.includes("rights") || normalized.includes("terms")) return "badge-check";
+  if (normalized.includes("creator") || normalized.includes("verified")) return "user-check";
+  if (normalized.includes("secure") || normalized.includes("protect")) return "shield-check";
+  if (normalized.includes("search") || normalized.includes("discover") || normalized.includes("find")) return "search";
+  if (normalized.includes("request") || normalized.includes("contact")) return "send";
+  if (normalized.includes("deal") || normalized.includes("forward")) return "handshake";
+  if (normalized.includes("support") || normalized.includes("help")) return "life-buoy";
+  return "sparkles";
+}
+
+function addLucideIcon(target, iconName) {
+  if (!target || target.querySelector(":scope > .ui-icon")) return;
+  const icon = document.createElement("i");
+  icon.className = "ui-icon";
+  icon.setAttribute("data-lucide", iconName);
+  icon.setAttribute("aria-hidden", "true");
+  target.prepend(icon);
+}
+
+function renderLucideIcons() {
+  if (window.lucide && typeof window.lucide.createIcons === "function") {
+    window.lucide.createIcons();
+    return;
+  }
+  window.setTimeout(() => {
+    if (window.lucide && typeof window.lucide.createIcons === "function") {
+      window.lucide.createIcons();
+    }
+  }, 600);
+}
+
+function applyPublicIcons() {
+  const iconTargets = [
+    ".premium-category-card",
+    ".feature-tile",
+    ".spotlight-card",
+    ".process-grid article",
+    ".timeline-grid article",
+    ".plain-list div",
+    ".license-card",
+    ".industry-grid a",
+    ".faq-list summary",
+  ];
+
+  document.querySelectorAll(iconTargets.join(",")).forEach((item) => {
+    addLucideIcon(item, iconForText(item.textContent || ""));
+  });
+}
+
+function initPublicPageEnhancements() {
+  document.querySelectorAll("a, button, h1, h2, h3, span, strong").forEach((item) => {
+    if ((item.textContent || "").trim() === "Find Projects") {
+      item.textContent = "Browse Listings";
+    }
+  });
+
+  applyPublicIcons();
+
+  document.querySelectorAll(".section-heading, .luxury-hero__copy, .showcase-rotator, .page-hero__inner, .page-hero > .mx-auto, .page-intro__grid, .premium-category-card, .featured-carousel-card, .feature-tile, .spotlight-card, .market-card, .process-grid article, .timeline-grid article, .plain-list div, .product-detail-card, .contact-panel, .form-shell, .faq-list details").forEach((item, index) => {
+    item.classList.add("reveal-item");
+    item.style.setProperty("--reveal-delay", `${Math.min(index % 8, 7) * 55}ms`);
+  });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal-item").forEach((item) => observer.observe(item));
+  } else {
+    document.querySelectorAll(".reveal-item").forEach((item) => item.classList.add("is-visible"));
+  }
+
+  renderLucideIcons();
+}
+
+document.addEventListener("etch:include-loaded", () => {
+  syncInternalLinkPaths();
+  bindHeaderInteractions();
+  initNewsletterForms();
+  applyPublicIcons();
+  renderLucideIcons();
+});
 
 const mobileToggle = document.querySelector("[data-mobile-toggle]");
 const mobileMenu = document.getElementById("mobile-menu");
@@ -248,37 +412,43 @@ document.addEventListener("click", (event) => {
   });
 });
 
-const newsletterForm = document.querySelector("[data-newsletter-form]");
-const newsletterFeedback = document.querySelector("[data-newsletter-feedback]");
+function initNewsletterForms() {
+  document.querySelectorAll("[data-newsletter-form]").forEach((newsletterForm) => {
+    if (newsletterForm.dataset.newsletterReady === "true") return;
+    const newsletterFeedback = newsletterForm.querySelector("[data-newsletter-feedback]") || newsletterForm.parentElement?.querySelector("[data-newsletter-feedback]");
+    if (!newsletterFeedback) return;
+    newsletterForm.dataset.newsletterReady = "true";
 
-if (newsletterForm && newsletterFeedback) {
-  newsletterForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const email = new FormData(newsletterForm).get("email")?.toString().trim();
-    if (!email) {
-      newsletterFeedback.textContent = "Please enter your email address.";
-      newsletterFeedback.classList.add("form-feedback--error");
-      return;
-    }
+    newsletterForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const email = new FormData(newsletterForm).get("email")?.toString().trim();
+      if (!email) {
+        newsletterFeedback.textContent = "Please enter your email address.";
+        newsletterFeedback.classList.add("form-feedback--error");
+        return;
+      }
 
-    const button = newsletterForm.querySelector("button[type='submit']");
-    window.EtchUI?.setButtonLoading(button, true, "Subscribing...");
-    try {
-      const { error } = await window.EtchApi.subscribeNewsletter(email, "homepage");
-      if (error) throw error;
-      newsletterFeedback.textContent = "Subscription received.";
-      newsletterFeedback.classList.remove("form-feedback--error");
-      newsletterFeedback.classList.add("form-feedback--success");
-      newsletterForm.reset();
-    } catch (error) {
-      newsletterFeedback.textContent = error.message || "Unable to subscribe right now.";
-      newsletterFeedback.classList.add("form-feedback--error");
-      window.EtchUI?.toast(newsletterFeedback.textContent, "error");
-    } finally {
-      window.EtchUI?.setButtonLoading(button, false);
-    }
+      const button = newsletterForm.querySelector("button[type='submit']");
+      window.EtchUI?.setButtonLoading(button, true, "Subscribing...");
+      try {
+        const { error } = await window.EtchApi.subscribeNewsletter(email, "homepage");
+        if (error) throw error;
+        newsletterFeedback.textContent = "Subscription received.";
+        newsletterFeedback.classList.remove("form-feedback--error");
+        newsletterFeedback.classList.add("form-feedback--success");
+        newsletterForm.reset();
+      } catch (error) {
+        newsletterFeedback.textContent = error.message || "Unable to subscribe right now.";
+        newsletterFeedback.classList.add("form-feedback--error");
+        window.EtchUI?.toast(newsletterFeedback.textContent, "error");
+      } finally {
+        window.EtchUI?.setButtonLoading(button, false);
+      }
+    });
   });
 }
+
+initNewsletterForms();
 
 const searchQuery = urlParams.get("q");
 const searchInputs = document.querySelectorAll('input[name="q"]');
@@ -370,6 +540,15 @@ function listingUrl(listing) {
   return `product-detail?id=${id}`;
 }
 
+function listingAvailability(listing) {
+  const source = String(listing.rights_summary || listing.license_type || listing.status || "").toLowerCase();
+  if (source.includes("option")) return "Optioned";
+  if (source.includes("exclusive")) return "Exclusive";
+  if (source.includes("license")) return "Licensed";
+  if (source.includes("invite")) return "Invitation Only";
+  return "Available";
+}
+
 function renderMarketCard(listing, index = 0) {
   const media = listing.cover_url
     ? `<img class="market-card__image" src="${listing.cover_url}" alt="${listing.title || ""}" loading="lazy" />`
@@ -380,7 +559,7 @@ function renderMarketCard(listing, index = 0) {
       <div class="market-card__body">
         <div class="market-card__meta-row">
           <span class="market-card__label">${listing.category || "Listing"}</span>
-          <span class="market-card__price">${formatListingPrice(listing)}</span>
+          <span class="market-card__price">${listingAvailability(listing)}</span>
         </div>
         <h3>${listing.title || ""}</h3>
         <p>${listing.description || ""}</p>
@@ -473,6 +652,14 @@ async function hydrateHeroStats() {
     const summary = await window.EtchApi.getPlatformSummary();
     statsGrid.innerHTML = renderHeroStats(summary);
   } catch (error) {
+    if (isSupabaseConfigError(error)) {
+      statsGrid.innerHTML = renderHeroStats({
+        liveListings: "Sample",
+        creatorCount: "Preview",
+        liveCategories: 6,
+      });
+      return;
+    }
     statsGrid.innerHTML = window.EtchUI.emptyState
       ? window.EtchUI.emptyState("Unable to load stats", "Platform metrics could not be retrieved right now.", "Refresh page", window.location.href)
       : "<p>Unable to load stats.</p>";
@@ -485,6 +672,17 @@ function showCollectionError(target, message) {
   target.innerHTML = window.EtchUI?.emptyState
     ? window.EtchUI.emptyState("Unable to load", message, null, null)
     : `<p>${message}</p>`;
+}
+
+function isSupabaseConfigError(error) {
+  return String(error?.message || error || "").toLowerCase().includes("supabase is not configured");
+}
+
+function showSamplePreviewState(target, title = "Sample preview", copy = "Live content will appear here after launch.") {
+  if (!target) return;
+  target.innerHTML = window.EtchUI?.emptyState
+    ? window.EtchUI.emptyState(title, copy, null, null)
+    : `<p>${title}</p>`;
 }
 
 async function hydratePublicListings() {
@@ -517,7 +715,7 @@ async function hydratePublicListings() {
       sort,
     });
     if (!listings.length) {
-      target.innerHTML = window.EtchUI.emptyState("No listings found", "Try another search or browse all marketplace categories.", "Browse all", "products");
+      target.innerHTML = window.EtchUI.emptyState("Sample preview", "Live listings will appear here as creators publish. Browse the preview sections for launch examples.", "Browse all", "products");
       if (countLabel) countLabel.textContent = "0 listings found";
       return;
     }
@@ -525,6 +723,11 @@ async function hydratePublicListings() {
     if (countLabel) countLabel.textContent = `${listings.length} listing${listings.length === 1 ? "" : "s"} shown`;
     document.querySelector("[data-market-empty]")?.setAttribute("hidden", "");
   } catch (error) {
+    if (isSupabaseConfigError(error)) {
+      showSamplePreviewState(target, "Sample preview", "Live listings will appear here once Supabase is connected.");
+      if (countLabel) countLabel.textContent = "Sample preview";
+      return;
+    }
     showCollectionError(target, error.message || "Listings could not be loaded.");
     if (countLabel) countLabel.textContent = "Unable to load listings";
     window.EtchUI?.toast(error.message || "Listings could not be loaded.", "error");
@@ -579,6 +782,10 @@ async function hydrateFeaturedCreators() {
         <p class="text-slate leading-8">${creator.bio || ""}</p>
       </article>`).join("");
   } catch (error) {
+    if (isSupabaseConfigError(error)) {
+      showSamplePreviewState(grid, "Sample preview", "Featured creators will appear here once creator profiles are connected.");
+      return;
+    }
     showCollectionError(grid, error.message || "Featured creators could not be loaded.");
     window.EtchUI?.toast(error.message || "Featured creators could not be loaded.", "error");
   }
@@ -628,6 +835,9 @@ async function hydrateListingDetail() {
       heroImage.alt = listing.title || "";
     }
   } catch (error) {
+    if (isSupabaseConfigError(error)) {
+      return;
+    }
     panel.innerHTML = window.EtchUI.emptyState("Unable to load listing", error.message || "Please try again shortly.", "Browse listings", "products");
     window.EtchUI?.toast(error.message || "Listing could not be loaded.", "error");
   }
@@ -643,6 +853,10 @@ async function hydrateRelatedListings() {
       ? listings.map(renderMarketCard).join("")
       : window.EtchUI.emptyState("No related listings", "More public listings will appear here soon.", null, null);
   } catch (error) {
+    if (isSupabaseConfigError(error)) {
+      grid.innerHTML = window.EtchUI.emptyState("Sample preview", "Related live listings will appear after launch.", null, null);
+      return;
+    }
     showCollectionError(grid, error.message || "Related listings could not be loaded.");
   }
 }
